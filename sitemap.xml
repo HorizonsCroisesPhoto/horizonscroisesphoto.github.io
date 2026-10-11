@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://horizonscroisesphoto.com/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/lazy-afternoon.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/queen-of-the-karoo.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/the-wanderer.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/dust-dance.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/mud-and-mountains.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/midday-dreams.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/the-gentle-gaze.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/tirages.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://horizonscroisesphoto.com/a-propos.html</loc><lastmod>2026-10-10</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://horizonscroisesphoto.com/</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/the-veiled-rose-street-art-miami-2000.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-lazy-afternoon-aquila-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-lazy-afternoon-aquila-afrique-du-sud-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-queen-of-the-karoo-aquila-afrique-du-sud-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/elephant-the-wanderer-karoo-afrique-du-sud-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/elephante-bain-de-poussiere-dust-dance-karoo-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/rhinoceros-blanc-mud-and-mountains-aquila-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-endormie-midday-dreams-aquila-karoo-1600.jpg</image:loc></image:image><image:image><image:loc>https://horizonscroisesphoto.com/img/girafe-the-gentle-gaze-karoo-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/lazy-afternoon.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-lazy-afternoon-aquila-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/queen-of-the-karoo.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-queen-of-the-karoo-aquila-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/the-wanderer.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/elephant-the-wanderer-karoo-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/dust-dance.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/elephante-bain-de-poussiere-dust-dance-karoo-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/mud-and-mountains.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/rhinoceros-blanc-mud-and-mountains-aquila-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/midday-dreams.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/lionne-endormie-midday-dreams-aquila-karoo-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/wild-souls-of-aquila/the-gentle-gaze.html</loc><lastmod>2026-10-11</lastmod><image:image><image:loc>https://horizonscroisesphoto.com/img/girafe-the-gentle-gaze-karoo-afrique-du-sud-1600.jpg</image:loc></image:image></url>
+  <url><loc>https://horizonscroisesphoto.com/tirages.html</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://horizonscroisesphoto.com/a-propos.html</loc><lastmod>2026-10-11</lastmod></url>
 </urlset>
