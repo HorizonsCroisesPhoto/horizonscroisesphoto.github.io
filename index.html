@@ -51,27 +51,29 @@
 <section class="section" id="series" aria-labelledby="h-series">
   <div class="wrap">
     <div class="section-head"><h2 id="h-series">Séries</h2><p class="label">Tableau des escales</p></div>
-    <div class="board-wrap">
-      <table class="board">
-        <thead><tr><th scope="col">Escale</th><th scope="col">Série</th><th scope="col" class="hide-s">Photos</th><th scope="col" class="hide-s">Date</th><th scope="col">Statut</th></tr></thead>
-        <tbody>
-          <tr class="go">
-            <td><span class="code">CPT</span></td>
-            <td class="series"><a href="wild-souls-of-aquila/">Wild Souls of Aquila</a></td>
-            <td class="num hide-s">07</td>
-            <td class="num hide-s">01.2026</td>
-            <td><a class="status" href="wild-souls-of-aquila/">Disponible →</a></td>
-          </tr>
-          <tr>
-            <td><span class="code" style="border-color:var(--muted);color:var(--muted)">MIA</span></td>
-            <td class="series" style="color:var(--muted)">Street Art</td>
-            <td class="num hide-s">—</td>
-            <td class="num hide-s">—</td>
-            <td><span class="status soon">En préparation</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <ul class="departures">
+      <li>
+        <a class="dep" href="wild-souls-of-aquila/">
+          <span class="dep-cover">
+            <img src="img/lionne-lazy-afternoon-aquila-afrique-du-sud-900.jpg" srcset="img/lionne-lazy-afternoon-aquila-afrique-du-sud-900.jpg 900w, img/lionne-lazy-afternoon-aquila-afrique-du-sud-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="900" height="600" alt="Lionne bâillant dans la lumière chaude de l&#39;après-midi, Lazy Afternoon, réserve d&#39;Aquila, Afrique du Sud" loading="lazy">
+            <span class="code">CPT</span>
+          </span>
+          <span class="dep-body">
+            <h3 class="dep-title">Wild Souls of Aquila</h3>
+            <span class="dep-meta"><span>Escale Le Cap</span><span>07 photos</span><span>01.2026</span><span class="status">Disponible →</span></span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <div class="dep dep--soon">
+          <span class="dep-cover"><span class="code">MIA</span><span class="dep-soon">Prochaine escale</span></span>
+          <span class="dep-body">
+            <h3 class="dep-title">Street Art</h3>
+            <span class="dep-meta"><span>Escale Miami</span><span class="status">En préparation</span></span>
+          </span>
+        </div>
+      </li>
+    </ul>
   </div>
 </section>
 
