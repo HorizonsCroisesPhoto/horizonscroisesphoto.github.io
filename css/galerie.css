@@ -46,16 +46,24 @@
 .g-lb-bot { flex-direction: column; justify-content: center; gap: 12px; padding-bottom: 18px; }
 .g-lb-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .g-lb-actions .btn { padding: 13px 18px; cursor: pointer; }
-.g-credit { margin: 0; max-width: 62ch; text-align: center; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
-.g-credit a { color: var(--fg); }
-.g-credit.is-thanks { color: var(--fg); }
+/* Fenêtre « Photo offerte » (crédit Instagram) */
+.g-pop { width: min(calc(100vw - 32px), 440px); margin: auto; padding: 36px 28px 28px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); text-align: center; }
+.g-pop::backdrop { background: rgb(0 0 0 / 0.65); }
+.g-pop[open] { display: grid; justify-items: center; gap: 14px; }
+.g-pop h2 { margin: 0; font-size: 1.375rem; }
+.g-pop p { margin: 0; color: var(--muted); line-height: 1.6; }
+.g-pop .g-pop-ask { color: var(--fg); }
+.g-pop .g-pop-ask a { color: var(--blue); font-weight: 500; }
+.g-pop .btn { margin-top: 6px; padding: 13px 20px; }
+.g-pop button.g-x { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; background: none; color: var(--muted); border: 1px solid var(--line); font-size: 1.5rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.g-pop button.g-x:hover { color: var(--fg); border-color: var(--fg); }
 .g-back { margin: 0 0 -8px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .g-back a { color: var(--muted); text-decoration: none; }
 .g-back a:hover { color: var(--fg); }
 #tirage { scroll-margin-top: 16px; margin-top: clamp(40px, 6vw, 80px); }
 .g-lb-count { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--muted); }
 .g-lb-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; padding: 0 72px; }
-.g-lb-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 230px); width: auto; height: auto; object-fit: contain; }
+.g-lb-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 190px); width: auto; height: auto; object-fit: contain; }
 .g-lb button.g-x, .g-lb button.g-nav { background: rgb(11 11 12 / 0.6); color: var(--fg); border: 1px solid var(--line); width: 48px; height: 48px; font-size: 1.75rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
 .g-lb button.g-x:hover, .g-lb button.g-nav:hover { border-color: var(--fg); }
 .g-lb button.g-nav { position: absolute; top: 50%; transform: translateY(-50%); }

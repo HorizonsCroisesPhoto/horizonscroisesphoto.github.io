@@ -114,12 +114,12 @@
   // ----- visionneuse + téléchargement
   const lb = $("#g-lb");
   if (lb) {
-    const lbImg = $("img", lb), wait = $(".g-wait", lb), dl = $("#g-dl"), buy = $("#g-buy"), credit = $("#g-credit");
-    const CREDIT = credit.innerHTML;
-    dl.addEventListener("click", () => {
-      credit.innerHTML = "Merci&#8239;! Si vous publiez la photo, pensez à mentionner <a href=\"https://www.instagram.com/philou_inzesky/\" rel=\"noopener\" target=\"_blank\">@philou_inzesky</a>.";
-      credit.classList.add("is-thanks");
-    });
+    const lbImg = $("img", lb), wait = $(".g-wait", lb), dl = $("#g-dl"), buy = $("#g-buy"), pop = $("#g-pop");
+    // téléchargement offert : fenêtre qui demande de mentionner le compte Instagram
+    $("#g-free").addEventListener("click", () => pop.showModal());
+    $(".g-x", pop).addEventListener("click", () => pop.close());
+    pop.addEventListener("click", (e) => { if (e.target === pop) pop.close(); });
+    dl.addEventListener("click", () => { if (dl.href) setTimeout(() => pop.close(), 300); });
     buy.addEventListener("click", () => { lb.close(); order(photos[cur]); });
     show = async (i) => {
       cur = (i + photos.length) % photos.length;
@@ -127,7 +127,6 @@
       $(".g-lb-count", lb).textContent = "Photo n° " + ph.no + " · " + (cur + 1) + " / " + photos.length;
       if (!lb.open) lb.showModal();
       lbImg.removeAttribute("src"); wait.hidden = false; dl.removeAttribute("href");
-      credit.innerHTML = CREDIT; credit.classList.remove("is-thanks");
       buy.hidden = ph.s === "-"; // définition trop faible pour un tirage : téléchargement seul
       try {
         const url = await blobUrl(ph.f);
