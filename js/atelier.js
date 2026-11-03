@@ -233,7 +233,9 @@
     const url = LINKS[`${st.support}|${st.size}|${st.b}`];
     if (!url) return;
     form.querySelector(".btn").setAttribute("aria-busy", "true");
-    window.location.href = url + (REF ? "?client_reference_id=" + encodeURIComponent(REF) : "");
+    // Stripe n'accepte que lettres, chiffres, - et _ : « Painted Souls-5 » devient « Painted_Souls-5 »
+    const cref = REF.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9_-]+/g, "_");
+    window.location.href = url + (cref ? "?client_reference_id=" + cref : "");
   });
   // retour arrière depuis Stripe : réactiver le bouton
   window.addEventListener("pageshow", () => form.querySelector(".btn").removeAttribute("aria-busy"));
