@@ -1,0 +1,64 @@
+/* Galeries clients (Art équestre) : fond blanc façon Pic-Time, logo centré, couverture, titre, date,
+   puis les photos par partie. Photos chiffrées, déchiffrées dans le navigateur après le mot de passe. */
+.gal { --g-bg: #ffffff; --g-fg: #1d1d1f; --g-muted: #6e6e73; --g-line: #e6e6e6; background: var(--g-bg); color: var(--g-fg); color-scheme: light; }
+.gal main { background: var(--g-bg); }
+.gal .site-footer { background: var(--g-bg); color: var(--g-muted); border-top: 1px solid var(--g-line); }
+.gal .site-footer a { color: var(--g-muted); }
+.gal :focus-visible { outline: 2px solid var(--g-fg); outline-offset: 3px; }
+
+.g-hero { display: grid; justify-items: center; text-align: center; gap: clamp(18px, 2.4vw, 28px); padding: clamp(28px, 5vw, 64px) var(--gutter) clamp(28px, 4vw, 48px); }
+.g-logo { width: 64px; height: auto; }
+.g-cover { width: min(100%, 520px); max-height: 68vh; object-fit: contain; }
+.g-cover.is-land { width: min(100%, 980px); }
+.g-title { font-weight: 300; font-stretch: 112%; text-transform: uppercase; letter-spacing: 0.14em; font-size: clamp(1.9rem, 1.2rem + 3vw, 3.4rem); line-height: 1.12; margin: 0; color: var(--g-fg); }
+.g-date { font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem); margin: 0; color: var(--g-fg); }
+.g-crumbs { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-muted); margin: 0; }
+.g-crumbs a { color: var(--g-muted); }
+
+/* Mot de passe */
+.g-lock { display: grid; gap: 12px; justify-items: center; width: min(100%, 380px); margin-top: 8px; }
+.g-lock p { margin: 0; color: var(--g-muted); font-size: 0.9375rem; line-height: 1.5; }
+.g-lock form { display: flex; width: 100%; gap: 8px; }
+.g-lock input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 12px 14px; border: 1px solid #c9c9cc; border-radius: 0; background: #fff; color: var(--g-fg); }
+.g-lock button, .g-dl { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--g-fg); color: #fff; border: 1px solid var(--g-fg); padding: 12px 18px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+.g-lock button:hover, .g-dl:hover { background: #000; }
+.g-err { color: #b3261e !important; }
+.g-lock[hidden], [hidden] { display: none !important; }
+
+/* Parties et grille */
+.g-bar { position: sticky; top: 0; z-index: 3; background: rgb(255 255 255 / 0.94); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--g-line); }
+.g-bar .wrap { display: flex; gap: 6px 22px; flex-wrap: wrap; align-items: center; min-height: 52px; }
+.g-bar a { text-decoration: none; color: var(--g-muted); font-size: 0.9375rem; padding: 6px 0; border-bottom: 1px solid transparent; }
+.g-bar a:hover { color: var(--g-fg); border-bottom-color: var(--g-fg); }
+.g-bar .g-count { margin-left: auto; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-muted); }
+.g-section { padding: clamp(24px, 4vw, 48px) 0 0; scroll-margin-top: 60px; }
+.g-section h2 { text-align: center; font-weight: 400; font-stretch: 100%; text-transform: none; letter-spacing: 0.01em; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.7rem); margin: 0 0 clamp(16px, 2.4vw, 28px); color: var(--g-fg); }
+.g-grid { columns: 4 240px; column-gap: 6px; padding-inline: 6px; }
+.g-grid button { display: block; width: 100%; margin: 0 0 6px; padding: 0; border: 0; background: #f2f2f2; cursor: zoom-in; break-inside: avoid; }
+.g-grid img { display: block; width: 100%; height: auto; opacity: 0; transition: opacity .4s ease; }
+.g-grid img.is-in { opacity: 1; }
+.g-note { text-align: center; color: var(--g-muted); font-size: 0.875rem; line-height: 1.6; max-width: 70ch; margin: clamp(32px, 5vw, 64px) auto clamp(40px, 6vw, 80px); padding-inline: var(--gutter); }
+.g-note a { color: inherit; }
+
+/* Visionneuse */
+.g-lb { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #fff; color: var(--g-fg); }
+.g-lb::backdrop { background: rgb(255 255 255 / 0.96); }
+.g-lb[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.g-lb-top, .g-lb-bot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; }
+.g-lb-bot { justify-content: center; }
+.g-lb-count { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.1em; color: var(--g-muted); }
+.g-lb-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; padding: 0 64px; }
+.g-lb-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 150px); width: auto; height: auto; object-fit: contain; }
+.g-lb button.g-x, .g-lb button.g-nav { background: #fff; border: 1px solid var(--g-line); width: 46px; height: 46px; font-size: 1.6rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; color: var(--g-fg); }
+.g-lb button.g-nav { position: absolute; top: 50%; transform: translateY(-50%); }
+.g-lb .g-prev { left: 10px; } .g-lb .g-next { right: 10px; }
+.g-lb .g-wait { position: absolute; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--g-muted); }
+@media (max-width: 640px) { .g-lb-stage { padding: 0 8px; } .g-lb button.g-nav { display: none; } .g-grid { columns: 2 140px; } }
+
+/* Page de liste (Art équestre, thème du site) */
+.eq-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(20px, 2.6vw, 36px); }
+.eq-card { display: grid; gap: 14px; text-decoration: none; }
+.eq-card .dep-cover { aspect-ratio: 4 / 5; }
+.eq-card .dep-cover img { object-position: 50% 30%; }
+.eq-lock { display: inline-flex; align-items: center; gap: 6px; }
+.eq-lock svg { width: 12px; height: 12px; }
