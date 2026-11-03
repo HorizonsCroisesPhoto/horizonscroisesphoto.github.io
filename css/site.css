@@ -205,9 +205,9 @@ a.dep:hover .dep-title { color: var(--blue); }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 
 /* Intro des galeries (séries) : texte centré sur la page */
-.series-intro { display: grid; gap: 24px; justify-items: center; text-align: center; max-width: 72ch; margin-inline: auto; }
+/* le texte prend toute la largeur de la page */
+.series-intro { display: grid; gap: 24px; justify-items: center; text-align: center; padding-bottom: clamp(28px, 4vw, 56px); }
 .series-intro .strip, .series-intro .actions { justify-content: center; }
-.series-intro .lede { max-width: 40ch; }
-.series-intro .prose, .series-intro .charity { margin-inline: auto; }
+.series-intro .lede, .series-intro .prose, .series-intro .charity { max-width: none; }
 .series-intro .charity { border-left: 0; padding: 0; color: var(--copper); }
 .crumbs:has(+ .series-intro) { text-align: center; }
