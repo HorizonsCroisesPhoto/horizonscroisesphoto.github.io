@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Art équestre · Galeries des concours · Horizons Croisés</title>
-<meta name="description" content="Galeries photo des concours et entraînements équestres par Horizons Croisés Photographie : photos offertes en basse définition aux cavaliers.">
+<meta name="description" content="Galeries photo des concours équestres par Horizons Croisés Photographie, réservées aux membres des Écuries de Rouvre.">
 <link rel="canonical" href="https://horizonscroisesphoto.com/art-equestre/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Horizons Croisés Photographie">
 <meta property="og:title" content="Art équestre · Galeries des concours · Horizons Croisés">
-<meta property="og:description" content="Galeries photo des concours et entraînements équestres par Horizons Croisés Photographie : photos offertes en basse définition aux cavaliers.">
+<meta property="og:description" content="Galeries photo des concours équestres par Horizons Croisés Photographie, réservées aux membres des Écuries de Rouvre.">
 <meta property="og:url" content="https://horizonscroisesphoto.com/art-equestre/">
 <meta name="theme-color" content="#e6e4e0">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preload" href="../fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/site.css?v=bandeau1">
-<link rel="stylesheet" href="../css/galerie.css?v=1">
+<link rel="stylesheet" href="../css/galerie.css?v=2">
+<script>try{if(sessionStorage.getItem("hc-galeries-mdp"))document.documentElement.classList.add("eq-auto")}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
@@ -35,29 +36,26 @@
   <div class="series-intro">
     <h1>Art équestre</h1>
     <p class="lede">Concours et entraînements, photographiés au bord de la carrière</p>
-    <div class="prose"><p>Chaque galerie est réservée aux cavaliers et à leur club : le mot de passe vous est communiqué après l&#39;événement. Les photos se téléchargent gratuitement en basse définition.</p><p>Pour un tirage, un fichier haute définition, ou si vous souhaitez qu&#39;une photo soit retirée, écrivez-moi : <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p></div>
+    <div class="prose">
+      <p>Les galeries de cette rubrique sont protégées&#8239;: elles sont réservées aux membres des <a href="https://www.ecuriederouvre.fr" rel="noopener" target="_blank">Écuries de Rouvre</a>.</p>
+      <p data-locked>Saisissez le mot de passe qui vous a été communiqué par le club pour y accéder.</p>
+      <p>Les photos se téléchargent gratuitement en basse définition, avec le logo, pour un usage personnel. Pour un tirage ou un fichier haute définition, écrivez-moi&#8239;: <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
+    </div>
+    <div class="eq-gate" id="g-gate" data-locked>
+      <p class="label"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Accès réservé</p>
+      <form id="g-form" autocomplete="off">
+        <label class="sr-only" for="g-pw">Mot de passe</label>
+        <input id="g-pw" type="password" placeholder="Mot de passe" required autocapitalize="none" spellcheck="false">
+        <button class="btn" type="submit">Entrer</button>
+      </form>
+      <p class="eq-err" id="g-err" hidden>Mot de passe incorrect.</p>
+    </div>
+    <p class="eq-club"><a class="btn btn--ghost" href="https://www.ecuriederouvre.fr" rel="noopener" target="_blank">www.ecuriederouvre.fr <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3 7 9"/></svg></a></p>
   </div>
-  <ul class="eq-cards">
-      <li>
-        <a class="dep eq-card" href="concours-arnas-2026/">
-          <span class="dep-cover"><img src="concours-arnas-2026/couverture-700.jpg" width="467" height="700" alt="Couverture de la galerie Concours Arnas" loading="lazy"></span>
-          <span class="dep-body">
-            <h2 class="dep-title">Concours Arnas</h2>
-            <span class="dep-meta"><span>25 octobre 2026</span><span>35 photos</span><span class="status eq-lock"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Galerie protégée</span></span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a class="dep eq-card" href="concours-sandrans-2026/">
-          <span class="dep-cover"><img src="concours-sandrans-2026/couverture-700.jpg" width="700" height="467" alt="Couverture de la galerie Concours Sandrans" loading="lazy"></span>
-          <span class="dep-body">
-            <h2 class="dep-title">Concours Sandrans</h2>
-            <span class="dep-meta"><span>11 octobre 2026</span><span>25 photos</span><span class="status eq-lock"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Galerie protégée</span></span>
-          </span>
-        </a>
-      </li>
-  </ul>
+  <ul class="departures eq-cards" id="g-list" hidden></ul>
+  <p class="eq-remove">Vous apparaissez sur une photo et ne souhaitez pas qu&#39;elle soit publiée&#8239;? Écrivez-moi en indiquant la galerie et le numéro de la photo&#8239;: elle sera retirée du site. <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
 </div>
+<div id="galerie" hidden data-salt="NsMAKE4DE+rhnzu5FyOE1Q==" data-iter="300000" data-index="X7nS9xNX1gjP9rJDk2JBhg9x8PIo1rjGwraDly5PLJHv9jnbzOC/cHq+C7XV2F0/Cm/hP1FDvcz0OafxkUhx14tHyDe/Y1OEqBQV0n59QckJpYgDD9h81iVfrnmIhh1f501BunPorgEjT45d1TKd+BGkazcQDbb4DzD5QYGq/UApsNSHyNpUxmwoTldEDp9p8tzpDgk6VCZnMYEgWGmIJRe4CgxHAGD6j5xRWs2adt4aBMBTJs/p7fpo8D4RPVyf90dkAkrhVBOi/SgHlHXG1SO/TPELWl3Z0LWEAy35d6w+yA=="></div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -69,5 +67,6 @@
     </nav>
   </div>
 </footer>
+<script src="../js/galerie.js?v=2" defer></script>
 </body>
 </html>

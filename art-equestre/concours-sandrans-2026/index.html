@@ -3,23 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Concours Sandrans · 11 octobre 2026 · Art équestre · Horizons Croisés</title>
-<meta name="description" content="Galerie photo du Concours Sandrans, 11 octobre 2026, par Horizons Croisés Photographie.">
+<title>Galerie protégée · Art équestre · Horizons Croisés</title>
+<meta name="description" content="Galerie photo réservée aux membres des Écuries de Rouvre.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://horizonscroisesphoto.com/art-equestre/concours-sandrans-2026/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Horizons Croisés Photographie">
-<meta property="og:title" content="Concours Sandrans · 11 octobre 2026 · Art équestre · Horizons Croisés">
-<meta property="og:description" content="Galerie photo du Concours Sandrans, 11 octobre 2026, par Horizons Croisés Photographie.">
+<meta property="og:title" content="Galerie protégée · Art équestre · Horizons Croisés">
+<meta property="og:description" content="Galerie photo réservée aux membres des Écuries de Rouvre.">
 <meta property="og:url" content="https://horizonscroisesphoto.com/art-equestre/concours-sandrans-2026/">
 <meta name="theme-color" content="#e6e4e0">
 <link rel="icon" type="image/png" href="../../favicon.png">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 <link rel="preload" href="../../fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../css/site.css?v=bandeau1">
-<link rel="stylesheet" href="../../css/galerie.css?v=1">
+<link rel="stylesheet" href="../../css/galerie.css?v=2">
+<script>try{if(sessionStorage.getItem("hc-galeries-mdp"))document.documentElement.classList.add("eq-auto")}catch(e){}</script>
 </head>
-<body class="gal">
+<body>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="../../" aria-label="Horizons Croisés Photographie, accueil"><img src="../../img/emblem-104.png" width="52" height="46" alt=""><b>Horizons Croisés<span>Photographie</span></b></a>
@@ -31,32 +32,37 @@
   </div>
 </header>
 <main>
-<div class="g-hero">
-  <p class="g-crumbs"><a href="../../">Accueil</a> / <a href="../">Art équestre</a></p>
-  <img class="g-logo" src="../../img/emblem-104.png" width="104" height="92" alt="">
-  <img class="g-cover is-land" src="couverture.jpg" width="1200" height="800" alt="Couverture de la galerie Concours Sandrans" fetchpriority="high">
-  <h1 class="g-title">Concours Sandrans</h1>
-  <p class="g-date">11 octobre 2026</p>
-  <div class="g-lock" id="g-lock">
-    <p>Galerie réservée aux cavaliers et à leur club. Saisissez le mot de passe qui vous a été communiqué.</p>
-    <form id="g-form" autocomplete="off">
-      <label class="sr-only" for="g-pw">Mot de passe</label>
-      <input id="g-pw" type="password" placeholder="Mot de passe" required autocapitalize="none" spellcheck="false">
-      <button type="submit">Ouvrir</button>
-    </form>
-    <p class="g-err" id="g-err" hidden>Mot de passe incorrect.</p>
+<div class="wrap section" style="padding-bottom:0">
+  <p class="crumbs"><a href="../../">Accueil</a> / <a href="../">Art équestre</a><span id="g-crumb"></span></p>
+  <div class="series-intro">
+    <ul class="strip" id="g-strip" hidden></ul>
+    <h1 id="g-title" data-locked>Galerie protégée</h1>
+    <div class="prose" data-locked><p>Cette galerie est réservée aux membres des <a href="https://www.ecuriederouvre.fr" rel="noopener" target="_blank">Écuries de Rouvre</a>. Saisissez le mot de passe qui vous a été communiqué par le club.</p></div>
+    <div class="prose" id="g-help" hidden><p>Touchez une photo pour l&#39;agrandir, puis «&#8239;Télécharger gratuitement&#8239;»&#8239;: les photos sont offertes en basse définition, avec le logo, pour un usage personnel.</p></div>
+    <div class="eq-gate" id="g-gate" data-locked>
+      <p class="label"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Accès réservé</p>
+      <form id="g-form" autocomplete="off">
+        <label class="sr-only" for="g-pw">Mot de passe</label>
+        <input id="g-pw" type="password" placeholder="Mot de passe" required autocapitalize="none" spellcheck="false">
+        <button class="btn" type="submit">Entrer</button>
+      </form>
+      <p class="eq-err" id="g-err" hidden>Mot de passe incorrect.</p>
+    </div>
   </div>
 </div>
 <div class="g-bar" id="g-bar" hidden><div class="wrap"></div></div>
-<div id="g-content" hidden>
-  <p class="g-note" id="g-note">Touchez une photo pour l&#39;agrandir, puis « Télécharger » : les photos sont offertes en basse définition, avec le logo, pour un usage personnel. Pour un tirage, un fichier haute définition, ou si vous souhaitez qu&#39;une photo soit retirée, écrivez-moi : <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
+<div class="wrap" id="g-content" hidden>
+  <p class="g-note" id="g-note">Pour un tirage ou un fichier haute définition, écrivez-moi&#8239;: <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
+</div>
+<div class="wrap" style="padding-block:clamp(36px,5vw,64px) clamp(56px,8vw,120px)">
+  <p class="eq-remove">Vous apparaissez sur une photo et ne souhaitez pas qu&#39;elle soit publiée&#8239;? Écrivez-moi en indiquant la galerie et le numéro de la photo&#8239;: elle sera retirée du site. <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
 </div>
 <dialog class="g-lb" id="g-lb" aria-label="Photo agrandie">
   <div class="g-lb-top"><span class="g-lb-count"></span><button type="button" class="g-x" aria-label="Fermer">×</button></div>
   <div class="g-lb-stage"><span class="g-wait">Chargement…</span><img alt=""><button type="button" class="g-nav g-prev" aria-label="Photo précédente">‹</button><button type="button" class="g-nav g-next" aria-label="Photo suivante">›</button></div>
-  <div class="g-lb-bot"><a class="g-dl" id="g-dl">Télécharger gratuitement <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a></div>
+  <div class="g-lb-bot"><a class="btn" id="g-dl">Télécharger gratuitement <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a></div>
 </dialog>
-<div id="galerie" hidden data-slug="concours-sandrans-2026" data-salt="66ohgEk8owlcNDAV/Jb4xA==" data-iter="300000" data-manifest="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"></div>
+<div id="galerie" hidden data-salt="NsMAKE4DE+rhnzu5FyOE1Q==" data-iter="300000" data-manifest="yqtjsOCpRwqcDugaEpZgOUxlROQKQwDj8CHfVNT1XnbzInMrqvCLcMLD5hRcePqhPGGEF0ng4kiOe2G7vDMCpDRnyQZl8CZnfzlTSAKD30R+SkS0TRS1Os7W2OsdOZDvUt84QgRwf/1Boz5kgHcQt1SvkZpYMahWmvm8RJ4Ms5PzWP/RpvCPbU9BJ2OeLZaSFIw4slnRm/vhwqGDtZWBWii5dYSsFWBd3GyfRUY81y4iH/83F8TdEl0pzX1N0CNZ48PjxrktaG2xyxG+G1JAAsBbKPlKFfxJRpG+7iTgYNjhASwGgFoaLpRPcfIRsI76CseE+xxVawXrh2crF41i6vbMpn7OZLQnI0GJ6P0cq3li9k00I0mI1Dl8ojj43UZlSuLn9MxQYqCVEceCf5idaQdcpNR5lI2/jFZS2aP0eYfuJt+ZhKt0QJMLplPAppi8mYyvGGjw+0MfyIojZiTtcBfrR99KGyQLl04WaKv6bjdyYE77NG6grofWjUkntG55/HuX+LpcwrJ/9GBlLcDXfpAnzNR1xM0JCmr31BsONUvDNMSBkQaLvOFSfzI1AEt807n48sLFc0XkbvRiu1V0RdSWPQrcE0WKyzJCAsEzCz8haJsoprCVhuU1XVSIguwx4iVb20T8A+43mqOjTgE41f+Y1vuYn0MM1anQhjNzPh3pCRq7HTq7hBcsPiiD3rNreoAmZp+Sr2bvznjgjpT9CYoTymJcU1I1hiWwVeR/nBA2akk/prrHozUIpozhCG0c10GLkMECjgirnN2b0qB6NmWFzmGEkGqPv9KNpznPUVDq09dNuridEcHwPvbV+EgDbnTiq38xMGURDyhRdijctjF+2g9GtCRwaXM5VBMjiywpS2dY/BIFAt+inJ1nhEnIOr/3WIzMPGv4e3g1d5RYQ7rzO+Cf1A/NjCB9xFL3ot2aYb74SuVhqJAbvN/pJIinb+0+R8/NEO0P5ucD/eif5jf3RNczJkQHrjFuEznhi0gYszNMmB1sZo0GihS54q0GYGdndQgTFD4e0orhs+0vtEMVL6SvF4DdosShrvnAKuTcGrys2nPP3oFeyoo0DyZmeBSDOkvP6zRkEiYkVMXdRh12yBYKi7kjOhKAMM839n8ahBeyQtSfyzMGR53RJsOu73VBGGjmqnEjrFt77KQ4WOBSz/hMdyPq1ZlYZ7wRTe0qBhubdGOecNqFzy7Ja6HRH2zYgGd2K9Qky9c57GA1fgqrVLMYiPnUGuYAnGHW5O829mt3oGM6Z6IS72UpQaonkY/sZvBKtCY52XcL/DU7re1BzHkrojWg0PRqvVkjZxuCbypgS8W2RADiJwPKGENLl2X++oIsifXaOhoqAZm3G0GzLge08SYhGQcgw6ig2p0z5Kb3WNEgMVMCb+EE6XIHH6S1S/1+2Q3dbJvk1rbuh7X0c8PXxJ8m4+Q3HeCj4Kxm3uM7ca3M2baZ1S+c/knt0+1uAKLGRK3/+JPe4/RqV+a/h9zv6HUxcmt7bedwCzFBf1TMwhoPTgdK5TxN7v1n9RUkMkn4/XeBPmagvXzGzRMfdyGuhiGn/JSzOrddF9sEqKJoWj9DEcihbu2BHDlKp+jyUzhhXVHMk3vhroeSfp06y2b5aepUniAuf5OBka35pDFOq6H5KU9gf5fNTOmTMST10gsCFqd65bfj8aLnd/2Kg77RTvexaKyLeu60+5+7xLCXQFFUTiBFohox5SfhoaKV7s0PZF9yr5euhyHB7CBlyaXUqix9w8kofunq5usTkssE6b5ps8PQhltzVskF9w5OP0z6L5qW9w6dKJtSxycecAtc75kReIum2YveEkEbMUQ65VmGKxzlil9NWzfXpH66EpHLEXOcUoLxYxNtbpokYgIHQF/IRtQJPd6+sB0HJVKSWIkue+AwnrOSeDqUN467fyUP/1f8E78VdsncG6IXqdD/hux3EqhCsEj5zymx09Dbl9KMvEmHqEg9js/eRO6NRxRbNB/s5hjhpSN/JiaWeTJzPKWepvdGYu3XiRxqv8cBdH0edD2YOpTHUiQSqsXVYgiHnZL/FJQCZZHymoMUF8cOrSq/oKzAeM2ZNZGP3DrGQRpESx4VQ+wIFqEmLrsmnw6Zs+2ehJ0Wj0SULM/ddlojcVO0LRSouSYdr1cNp53A2BqYdIY6mlFiDxlVtLr0r1JENDD7hZN4QJg9wcdjCO8ZcPGm+gvZFnSJzyCHV0+5ZUAsxUYLMuyXr9EWS1f93fNz8xhk+OQApxK+YVKhTEHgKcRXAdQuk9Y/Omu4AnvgRxH74QZX/MJV6XyZ/GvqSp2AE6CmWeuJRyjTI9CAiAqPqlf5M7XJeuhh12b6iMPYwXv9AG6hdYmvCxutCyQwzO/QANevFBkcA9JdeVuYGEQ1uvch0NrI/I/it9lDFTQVVvqXfiFiPeJqaOyo35UYzBnEURqkTSwNGTLwZ6MCn8n3gkciNldSDYAPxTHws6n/J4fhlsfgTCwu+gOkm+l5h82YmBGlzquWGClfumDj0U9Z1H46k7OYN/8XJiVdqQ07w6zFws7HIESOn3xwephgaPVj0nJwEAArR8AsHg8R2OTAyxft4GgZounl98RU+8RlV0/aXqTWmWuRhIOo9DsL+GIQs+TRjcSYMFHJAThX3SxHESiMAWQKLKSWGsq9ZcfTwaLPqWAUqsA+WFkdqWMvpkkkK+Zh3Xn75XU0pqcGA7gq6lY4hnFb8RlFe+cLdWLQpAuqskOMctFQ+U5TF8pTKBZBb34lTUbZ5OS8lAOdRI+zobRsymGGpfobVKNGlIP80YlPxO+k4b72o0wYB+wvC1PvnGHOuFFAI8cuAdCS0X5kTvGHmibKuIrgjHmZLQohD1Set8GGus8qctYkr9lkoohuTafxMStULMoqWvQY7RGa3zmJASyj2r6MSMLNiRCKJqVg1dn8AzieoWPdLp1LDPN2DuId7b2VlTvF/YYiNClMwDNQBPE5ehb6IfVVdDjfpjNfMIDzQDKrpeDEo+ZB8/TpdF32sAYmpVnkOJjWXQoEoGOcZLLxJp2qNsmWNSmHEx8dPs0fckrebpMUJU39hh/VaDhi6dEhY5dpNzXDokI7/Wz7+OjqE59Hpi9m0sAGy8REM1TdT0hPlU33MiudDiwTGz/OGn45UvabP1fccaKSKQAnR7GmiYxs2OTqc4TxokfZ0w/O8ITw9f7j9PYjn/4bBxDt+Cs9IOjU9eZa2OgbbYTJApJxfK3AiXGqceGDLAY28fyfDTAqJzluegzsGhSvOm8xF5ogxiYGHT9j7Xo0l2goiFBGxZ3uTdOfDdFPgcWkukkgCTnyIQSYxa/v3MPKLHKqN9IkavDv5SsIwnA0jB8giJceFiRL0RCGYNeBf8zJ3XNGPi7cuxj5lcDwsA7gbe4VBGgTXYLBSXFz2G+D2M89viDckwa77SrjLw6Vc5PlIallsoiAhX4rTJpODcw+9BRamRpBH+tvjGwj6cCO2jH+b5OifSeMJ87lERKTokXqSwhWk8l0QyCi/IQr7z/HRKSCqCc6bRk8ZhAsIZ6VvTT/FlnUuN4ESKTuIY09LxugztcIeDUEIIF+znJVPzZCmUbtAgKXa+c7t03wpCb3bo0326JCXiBpGItISUNxXpBdMBBdYcH66rDGcndgsb7YfzLoyfABIhZtpB4rUut+c84DyD/PERj9NYYy7iqGkA9FBaN6txyRMHpKEdK6UUgIrwdVBJd+KKGIdAk8/pNcc2+XxsCMmWmou6UFUMZsP8VkAcpg7fZLKoBqpVVlzenh+8B8pkIcniwfN7k1mnjRSWFdK3O1ORqCrfkAuhfKiFmpcT9AD6MhYssPzWKG+4Qv6OKtCEKZa2WPuNNvOdls1BqRnK3gwFGiMlIUrMtTrDEL0TFyXkGhv9Seod8V2RIeFkTPSCKhbCchjd3nCPzUKLIW7pVxl/ldSpFuWx8DHthdRgzAuIalNDxbuzEPIyP2tKfRshe/CNcplRCndp9b3Oq2KUGx/R0uk9cnsZZ78X6/d21Af9LVky+FAK39Emshh9qNdZWdCqbneLtme5qRFKEHGlDCVMk/fIvrkP27cxs3UQLcuRvVYN5urHr1moB5vXSnCaat7eGtI8XXYSGfghNnDPW4d+BfSNFsm0vML90TvLoZzSEXiyZYZthoOH4CQaeNh7IWWN1EQc1WKKFB1oBu9unanYtVnioS9n/mqiK19Epeg1Q/cFx+hd9LcxpNgJFa2GfD/m2gNKh6JJSFBTm3oUXvnE7AT3dLYkVbSQ3eYugBFn5iUY+e2Ki2m+sv517PqCZbnT/QpQJHMUeSRT4LHzaPZ0Ww2tLcIGA2DXpU+yNUixzcIBE4KVoDAc/VzQq09OGEvp2Hs96FIULVb255plC6oduTB8xv1sYBCqBbp0gCOFtEkexKiGmYqVWJpvfl4OMZ3JfhuT03RwhlTbVmH0cqzC8ZDCx+UpJ4GZx8DfoK8RADIRPy0tphqg306vQiSavoglCUBG5GszP4sfsnbGJTWtXH8b9hOn/6gZef2UpCWJv+WxIn5SKfT4hb+OPNv3nNzy8Z/3OFKk2pk60ra7gJdqTP5rgGkBtr6btiz7q3OztofbomMCYLr7FRlyb+SDX8ZJKmdbXq3Kdv/r9RGeDwCiFa+1yr0dofkOKkHYGByy+h7AjzGewYWERz1a7ynLmKZwHz5icBjfoBAdd8mT0qjroO"></div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -68,6 +74,6 @@
     </nav>
   </div>
 </footer>
-<script src="../../js/galerie.js?v=1" defer></script>
+<script src="../../js/galerie.js?v=2" defer></script>
 </body>
 </html>
