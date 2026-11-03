@@ -103,9 +103,10 @@
         img.dataset.file = ph.t;
         b.appendChild(img); grid.appendChild(b);
         b.addEventListener("click", () => show(i));
+        ph.btn = b;
         io.observe(img);
       }
-      sec.appendChild(grid); out.insertBefore(sec, $("#g-note"));
+      sec.appendChild(grid); out.insertBefore(sec, $("#tirage") || $("#g-note"));
     });
     if (named) { bar.appendChild(el("span", "g-count", photos.length + " photos")); $("#g-bar").hidden = false; }
   }
@@ -113,13 +114,21 @@
   // ----- visionneuse + téléchargement
   const lb = $("#g-lb");
   if (lb) {
-    const lbImg = $("img", lb), wait = $(".g-wait", lb), dl = $("#g-dl");
+    const lbImg = $("img", lb), wait = $(".g-wait", lb), dl = $("#g-dl"), buy = $("#g-buy"), credit = $("#g-credit");
+    const CREDIT = credit.innerHTML;
+    dl.addEventListener("click", () => {
+      credit.innerHTML = "Merci&#8239;! Si vous publiez la photo, pensez à mentionner <a href=\"https://www.instagram.com/philou_inzesky/\" rel=\"noopener\" target=\"_blank\">@philou_inzesky</a>.";
+      credit.classList.add("is-thanks");
+    });
+    buy.addEventListener("click", () => { lb.close(); order(photos[cur]); });
     show = async (i) => {
       cur = (i + photos.length) % photos.length;
       const ph = photos[cur];
       $(".g-lb-count", lb).textContent = "Photo n° " + ph.no + " · " + (cur + 1) + " / " + photos.length;
       if (!lb.open) lb.showModal();
       lbImg.removeAttribute("src"); wait.hidden = false; dl.removeAttribute("href");
+      credit.innerHTML = CREDIT; credit.classList.remove("is-thanks");
+      buy.hidden = ph.s === "-"; // définition trop faible pour un tirage : téléchargement seul
       try {
         const url = await blobUrl(ph.f);
         if (photos[cur] !== ph) return;
@@ -137,6 +146,27 @@
     lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
     lb.addEventListener("touchend", (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1)); x0 = null; });
   }
+
+  // ----- commande d'un tirage ou du fichier HD (même configurateur que les pages œuvres)
+  let ordered = null;
+  async function order(ph) {
+    const sec = $("#tirage");
+    if (!sec || !window.atelier) return;
+    ordered = ph;
+    $("#g-ono").textContent = ph.no;
+    const note = $("#sizeNote");
+    if (note) note.textContent = ph.s ? "Pour garder une impression de qualité, cette photo est proposée jusqu'au " + ph.s.split(",").pop().replace("x", " × ") + " cm." : "";
+    sec.hidden = false;
+    const url = await blobUrl(ph.t); // aperçu sans le logo
+    window.atelier.set({ photo: url, photoSm: url, ref: ph.r, orient: ph.o, sizes: ph.s || "" });
+    sec.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  const back = $("#g-back");
+  if (back) back.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (ordered && ordered.btn) { ordered.btn.scrollIntoView({ behavior: "smooth", block: "center" }); ordered.btn.focus({ preventScroll: true }); }
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   // ----- formulaire
   $("#g-form").addEventListener("submit", async (e) => {

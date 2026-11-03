@@ -17,7 +17,8 @@
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
 <link rel="preload" href="../../fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../css/site.css?v=bandeau1">
-<link rel="stylesheet" href="../../css/galerie.css?v=2">
+<link rel="stylesheet" href="../../css/galerie.css?v=3">
+<link rel="stylesheet" href="../../css/atelier.css?v=4">
 <script>try{if(sessionStorage.getItem("hc-galeries-mdp"))document.documentElement.classList.add("eq-auto")}catch(e){}</script>
 </head>
 <body>
@@ -38,7 +39,7 @@
     <ul class="strip" id="g-strip" hidden></ul>
     <h1 id="g-title" data-locked>Galerie protégée</h1>
     <div class="prose" data-locked><p>Cette galerie est réservée aux membres des <a href="https://www.ecuriederouvre.fr" rel="noopener" target="_blank">Écuries de Rouvre</a>. Saisissez le mot de passe qui vous a été communiqué par le club.</p></div>
-    <div class="prose" id="g-help" hidden><p>Touchez une photo pour l&#39;agrandir, puis «&#8239;Télécharger gratuitement&#8239;»&#8239;: les photos sont offertes en basse définition, avec le logo, pour un usage personnel.</p></div>
+    <div class="prose" id="g-help" hidden><p>Touchez une photo pour l&#39;agrandir. Chaque photo se télécharge gratuitement en basse définition, avec le logo, idéale pour les réseaux sociaux&#8239;: en échange, merci de me mentionner <a href="https://www.instagram.com/philou_inzesky/" rel="noopener" target="_blank">@philou_inzesky</a> quand vous la publiez. Vous pouvez aussi commander un tirage réalisé par WhiteWall (tirage photo, toile, cadre noir ou caisse américaine) ou le fichier haute définition (25&#8239;€), livrés sans le logo.</p></div>
     <div class="eq-gate" id="g-gate" data-locked>
       <p class="label"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="7"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg> Accès réservé</p>
       <form id="g-form" autocomplete="off">
@@ -52,7 +53,84 @@
 </div>
 <div class="g-bar" id="g-bar" hidden><div class="wrap"></div></div>
 <div class="wrap" id="g-content" hidden>
-  <p class="g-note" id="g-note">Pour un tirage ou un fichier haute définition, écrivez-moi&#8239;: <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
+  <section class="atelier" id="tirage" aria-labelledby="h-atelier" data-photo="" data-ref="" data-orient="paysage" hidden>
+    <p class="g-back"><a href="#" id="g-back">← Revenir aux photos</a></p>
+    <div class="atelier-head">
+      <h2 id="h-atelier">Photo n° <span id="g-ono"></span> · Choisir son tirage</h2>
+      <p>Les aperçus suivent vos choix : la vue 3D pour la finition, la pièce pour juger du format. Le tirage et le fichier haute définition sont livrés sans le logo.</p>
+    </div>
+
+    <div class="views" aria-live="polite">
+      <figure class="view">
+        <div class="screen" id="screen3d">
+          <div class="stage3d" id="stage3d">
+            <div class="obj" id="obj">
+              <div class="cast" id="cast"></div>
+              <div class="face front" id="front3d"></div>
+              <div class="face side-l" id="sideL"><div class="wrapimg"></div></div>
+              <div class="face side-t" id="sideT"><div class="wrapimg"></div></div>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>Vue 3D</b><span id="cap3d">Tirage photo · 20 × 30 cm</span></figcaption>
+      </figure>
+      <figure class="view">
+        <div class="screen" id="screenRoom">
+          <div class="room" id="room" role="img" aria-label="Aperçu de la photo accrochée au mur au-dessus d'un buffet en chêne, dans la lumière du soleil">
+            <div class="sunshade"><div class="cast-sun" id="castSun"></div></div>
+            <div class="onwall" id="onwall"><div class="face front" id="frontRoom"></div></div>
+            <div class="light" id="light"></div>
+            <p class="room-msg" id="roomMsg" hidden>Fichier à télécharger : imprimez-le au format de votre choix</p>
+          </div>
+        </div>
+        <figcaption><b>Dans la pièce</b><label class="toggle" for="sun"><input type="checkbox" id="sun" checked> Lumière du jour</label></figcaption>
+      </figure>
+    </div>
+
+    <form class="panel" id="order" novalidate>
+      <fieldset>
+        <legend>Support</legend>
+        <div class="supports">
+          <label class="opt"><input type="radio" name="support" id="sup-tirage" value="tirage" checked><span class="dot"></span><b>Tirage photo <span class="from" data-from="tirage"></span></b><small>Papier photo Fuji Crystal Archive, à encadrer soi-même.</small></label>
+          <label class="opt"><input type="radio" name="support" id="sup-toile" value="toile"><span class="dot"></span><b>Toile <span class="from" data-from="toile"></span></b><small>Toile mate tendue sur châssis de 2 cm, la photo se prolonge sur les bords.</small></label>
+          <label class="opt"><input type="radio" name="support" id="sup-cadre" value="cadre"><span class="dot"></span><b>Cadre noir <span class="from" data-from="cadre"></span></b><small>Tirage contrecollé sur Alu Dibond, cadre en bois noir mat de 2 cm.</small></label>
+          <label class="opt"><input type="radio" name="support" id="sup-caisse" value="caisse"><span class="dot"></span><b>Caisse américaine noire <span class="from" data-from="caisse"></span></b><small>Tirage contrecollé sur Alu Dibond qui semble flotter dans une caisse en bois noir mat.</small></label>
+          <label class="opt opt--wide"><input type="radio" name="support" id="sup-fichier" value="fichier"><span class="dot"></span><b>Fichier numérique haute définition <span class="from" data-from="fichier"></span></b><small>Fichier JPEG pleine résolution, pour un usage privé.</small></label>
+        </div>
+      </fieldset>
+
+      <div class="panel-side">
+        <fieldset id="formats">
+          <legend>Format (cm)</legend>
+          <div class="sizes">
+            <label class="chip"><input type="radio" name="size" id="size-20" value="20x30" checked><span>20 × 30</span></label>
+            <label class="chip"><input type="radio" name="size" id="size-30" value="30x45"><span>30 × 45</span></label>
+            <label class="chip"><input type="radio" name="size" id="size-40" value="40x60"><span>40 × 60</span></label>
+            <input type="radio" name="size" id="size-hd" value="hd" hidden>
+          </div>
+          <p class="ship-note" id="sizeNote" hidden></p>
+        </fieldset>
+
+        <fieldset id="finish">
+          <legend>Finition</legend>
+          <label class="check" for="border"><input type="checkbox" name="border" id="border"><span><b>Bord blanc</b><small id="borderInfo"></small></span></label>
+        </fieldset>
+
+        <div class="sum" aria-live="polite">
+          <b id="sumLabel">Tirage photo, 20 × 30 cm</b>
+          <span class="price" id="price"></span>
+          <p class="ship-note" id="shipNote">Frais de port inclus pour une livraison en France.</p>
+        </div>
+
+        <button class="btn" type="submit">Commander <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <p class="legal">Paiement sécurisé par Stripe. En commandant, vous acceptez les <a href="../../conditions-de-vente.html">conditions de vente</a>.</p>
+
+        <p class="lab" id="lab"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M6.5 10.2l2.3 2.3 4.7-5"/></svg><span>Tirage réalisé à la commande par WhiteWall, laboratoire photo allemand plusieurs fois récompensé du titre de meilleur labo photo du monde (TIPA World Awards). Expédié directement chez vous.</span></p>
+      </div>
+    </form>
+  </section>
+
+  <p class="g-note" id="g-note">Une question sur une photo ou une commande&#8239;? Écrivez-moi&#8239;: <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
 </div>
 <div class="wrap" style="padding-block:clamp(36px,5vw,64px) clamp(56px,8vw,120px)">
   <p class="eq-remove">Vous apparaissez sur une photo et ne souhaitez pas qu&#39;elle soit publiée&#8239;? Écrivez-moi en indiquant la galerie et le numéro de la photo&#8239;: elle sera retirée du site. <a href="mailto:philippe.sestisoulier@gmail.com">philippe.sestisoulier@gmail.com</a></p>
@@ -60,9 +138,12 @@
 <dialog class="g-lb" id="g-lb" aria-label="Photo agrandie">
   <div class="g-lb-top"><span class="g-lb-count"></span><button type="button" class="g-x" aria-label="Fermer">×</button></div>
   <div class="g-lb-stage"><span class="g-wait">Chargement…</span><img alt=""><button type="button" class="g-nav g-prev" aria-label="Photo précédente">‹</button><button type="button" class="g-nav g-next" aria-label="Photo suivante">›</button></div>
-  <div class="g-lb-bot"><a class="btn" id="g-dl">Télécharger gratuitement <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a></div>
+  <div class="g-lb-bot">
+    <p class="g-credit" id="g-credit">Basse définition offerte, idéale pour les réseaux sociaux. En échange, merci de me mentionner <a href="https://www.instagram.com/philou_inzesky/" rel="noopener" target="_blank">@philou_inzesky</a> si vous publiez la photo.</p>
+    <div class="g-lb-actions"><a class="btn btn--ghost" id="g-dl">Télécharger gratuitement <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg></a><button type="button" class="btn" id="g-buy">Tirage ou fichier HD <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+  </div>
 </dialog>
-<div id="galerie" hidden data-salt="NsMAKE4DE+rhnzu5FyOE1Q==" data-iter="300000" data-manifest="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"></div>
+<div id="galerie" hidden data-salt="NsMAKE4DE+rhnzu5FyOE1Q==" data-iter="300000" data-manifest="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"></div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -74,6 +155,7 @@
     </nav>
   </div>
 </footer>
-<script src="../../js/galerie.js?v=2" defer></script>
+<script src="../../js/atelier.js?v=6" defer></script>
+<script src="../../js/galerie.js?v=3" defer></script>
 </body>
 </html>
