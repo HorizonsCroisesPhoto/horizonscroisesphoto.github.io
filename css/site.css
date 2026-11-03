@@ -211,3 +211,11 @@ a.dep:hover .dep-title { color: var(--blue); }
 .series-intro .lede, .series-intro .prose, .series-intro .charity { max-width: none; }
 .series-intro .charity { border-left: 0; padding: 0; color: var(--copper); }
 .crumbs:has(+ .series-intro) { text-align: center; }
+
+/* Bandeau du haut : gris clair, texte noir */
+.site-header { --hdr-bg: #e6e4e0; --hdr-fg: #0b0b0c; --hdr-muted: #5a5854; background: var(--hdr-bg); border-bottom-color: var(--hdr-bg); color: var(--hdr-fg); color-scheme: light; }
+.site-header .brand b { color: var(--hdr-fg); }
+.site-header .brand b span { color: var(--hdr-muted); }
+.site-header .nav a { color: var(--hdr-muted); }
+.site-header .nav a:hover, .site-header .nav a[aria-current="page"] { color: var(--hdr-fg); border-bottom-color: var(--hdr-fg); }
+.site-header :focus-visible { outline-color: var(--hdr-fg); }
