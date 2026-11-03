@@ -1,0 +1,121 @@
+/* Atelier de tirage des pages œuvres : les deux aperçus côte à côte (vue 3D / dans la pièce, à l'échelle), les choix juste dessous.
+   Palette et typo reprises du site (css/site.css) : crème, brun, cuivre ; Archivo, Newsreader, Plex Mono. */
+:root {
+  --wall: #e9e2d8;        /* mur de l'aperçu 3D */
+  --wall-2: #ddd4c8;
+  --frame: #0e0d0c;       /* bois noir */
+  --frame-edge: #1b1918;
+  --void: #050505;        /* jour de la caisse américaine */
+  --paper: #f7f3ee;       /* tranche du tirage papier */
+  --shadow: 40 24 8;      /* ombre portée (r g b) */
+}
+[hidden] { display: none !important; }
+
+
+/* ---------- Atelier de tirage ---------- */
+.atelier { border-top: 1px solid var(--line); margin-top: clamp(40px, 6vw, 80px); padding-top: clamp(32px, 4vw, 56px); display: grid; gap: clamp(20px, 2.4vw, 32px); }
+.atelier-head { display: flex; justify-content: space-between; align-items: end; gap: 12px 24px; flex-wrap: wrap; }
+
+/* Les deux aperçus */
+.views { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); }
+@media (max-width: 760px) { .views { grid-template-columns: minmax(0, 1fr); } }
+.view { display: grid; gap: 10px; margin: 0; min-width: 0; }
+.view figcaption { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.view figcaption b { font-weight: 500; color: var(--fg); letter-spacing: 0.14em; }
+.screen { position: relative; aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; background: var(--panel); border: 1px solid var(--line); }
+
+/* Vue 3D */
+.stage3d { position: absolute; inset: 0; display: grid; place-items: center; perspective: 1800px; perspective-origin: 50% 45%; background: none; }
+#screen3d { background: none; border-color: transparent; overflow: visible; }
+.obj { position: relative; transform-style: preserve-3d; transform: rotateY(13deg) rotateX(-1.5deg); transition: transform .6s cubic-bezier(.2,.6,.2,1), width .35s ease, height .35s ease; }
+.stage3d:hover .obj { transform: rotateY(6deg) rotateX(-1deg); }
+.face { position: absolute; backface-visibility: hidden; }
+.front { inset: 0; }
+.side-l { top: 0; height: 100%; transform-origin: 100% 50%; transform: rotateY(-90deg); }
+.side-t { left: 0; width: 100%; transform-origin: 50% 100%; transform: rotateX(90deg); }
+.cast { position: absolute; inset: 2% 0 0 3%; background: rgb(var(--shadow) / 0.30); filter: blur(9px); }
+
+/* Faces selon le support */
+.photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.front .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, rgb(255 255 255 / 0.10), rgb(255 255 255 / 0) 38%, rgb(0 0 0 / 0.08)); }
+.s-caisse .front { background: var(--frame); box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.10); }
+.s-caisse .front .void { position: absolute; background: var(--void); box-shadow: inset 2px 3px 8px #000; }
+.s-caisse .front .photo { box-shadow: 0 0 0 1px #000; }
+.s-cadre .front { background: linear-gradient(135deg, #24211f, var(--frame) 40%, #070707); box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.14), inset -1px -1px 0 rgb(0 0 0 / 0.6); }
+.s-cadre .front .photo { box-shadow: inset 2px 3px 7px rgb(0 0 0 / 0.55); }
+.s-cadre .front .glass { position: absolute; pointer-events: none; background: linear-gradient(118deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0) 34%, rgb(255 255 255 / 0) 70%, rgb(255 255 255 / 0.05)); }
+.s-caisse .side-l, .s-cadre .side-l { background: linear-gradient(90deg, #050505, var(--frame-edge)); }
+.s-caisse .side-t, .s-cadre .side-t { background: linear-gradient(0deg, #2a2725, #0a0a0a); }
+.s-toile .side-l { overflow: hidden; }
+.s-toile .side-l .wrapimg { position: absolute; inset: 0; background-size: auto 100%; background-position: left center; transform: scaleX(-1); filter: brightness(.62); }
+.s-toile .side-t { overflow: hidden; }
+.s-toile .side-t .wrapimg { position: absolute; inset: 0; background-size: 100% auto; background-position: center top; transform: scaleY(-1); filter: brightness(.9); }
+.s-tirage .side-l, .s-tirage .side-t { background: var(--paper); }
+
+/* Vue dans la pièce */
+.room { position: absolute; inset: 0; isolation: isolate; background: #e6dccd url("../img/piece-salon.jpg") center / cover no-repeat; }
+/* Ombre du soleil : visible seulement là où le mur reçoit le soleil (masque tiré de la photo) */
+.sunshade { position: absolute; inset: 0; pointer-events: none; -webkit-mask: url("../img/piece-soleil.png") 0 0 / 100% 100% no-repeat; mask: url("../img/piece-soleil.png") 0 0 / 100% 100% no-repeat; }
+.cast-sun { position: absolute; background: rgb(24 14 4 / 0.26); filter: blur(var(--sb, 1px)); transition: all .35s ease; }
+/* Lumière du mur reportée sur le tirage (zones au soleil / à l'ombre) */
+.light { position: absolute; inset: 0; pointer-events: none; background: url("../img/piece-lumiere.jpg") 0 0 / 100% 100% no-repeat; mix-blend-mode: multiply; opacity: .9; }
+.room.no-sun .sunshade, .room.no-sun .light { display: none; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--muted); }
+.toggle input { width: 14px; height: 14px; margin: 0; accent-color: var(--fg); }
+.room .onwall { position: absolute; transform: translate(-50%, -50%); transition: width .35s ease, height .35s ease; }
+.room .onwall .front { position: absolute; inset: 0; }
+.room .onwall::before { content: ""; position: absolute; inset: 0; background: rgb(var(--shadow) / 0.24); filter: blur(var(--blur, 6px)); transform: translate(var(--sx, 5px), var(--sy, 7px)); }
+
+/* Panneau de commande, sous les aperçus */
+.panel { border: 1px solid var(--line); background: var(--panel); padding: clamp(18px, 2.2vw, 28px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(20px, 3vw, 44px); min-width: 0; }
+@media (max-width: 900px) { .panel { grid-template-columns: minmax(0, 1fr); } }
+.panel-side { display: grid; gap: 22px; align-content: start; min-width: 0; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+legend { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 10px; }
+.supports { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start; }
+@media (max-width: 520px) { .supports { grid-template-columns: minmax(0, 1fr); } }
+.opt { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 2px 12px; align-items: start; align-content: start; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; transition: border-color .2s ease; }
+.opt:hover { border-color: var(--muted); }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt .dot { grid-row: span 2; width: 16px; height: 16px; margin-top: 3px; border: 1px solid var(--muted); border-radius: 50%; display: grid; place-items: center; }
+.opt b { font-weight: 500; font-size: 0.9375rem; line-height: 1.35; display: flex; justify-content: space-between; align-items: baseline; gap: 4px 10px; flex-wrap: wrap; }
+.opt b .from { font-family: var(--mono); font-weight: 400; font-size: 0.8125rem; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.price { font-size: 1.125rem !important; color: var(--fg) !important; font-variant-numeric: tabular-nums; }
+.ship-note { font-size: 0.8125rem; color: var(--muted); line-height: 1.5; margin: 0; }
+.opt small { color: var(--muted); font-size: 0.8125rem; line-height: 1.45; }
+.opt:has(input:checked) { border-color: var(--fg); }
+.opt--wide { grid-column: 1 / -1; }
+.check { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; }
+.check:has(input:checked) { border-color: var(--fg); }
+.check input { width: 16px; height: 16px; margin: 3px 0 0; accent-color: var(--fg); flex: none; }
+.check span { display: grid; gap: 2px; }
+.check b { font-weight: 500; font-size: 0.9375rem; }
+.check small { color: var(--muted); font-size: 0.8125rem; font-family: var(--mono); }
+.paper { position: absolute; background: #f8f6f2; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.04); }
+.room-msg { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); margin: 0; max-width: 80%; text-align: center; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); background: rgb(254 249 246 / 0.88); border: 1px solid var(--line); padding: 10px 14px; }
+.room.is-file .sunshade, .room.is-file .onwall, .room.is-file .light { display: none; }
+.opt:has(input:checked) .dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--fg); }
+.opt:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip span { display: inline-block; padding: 9px 14px; border: 1px solid var(--line); background: var(--bg); font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; cursor: pointer; }
+.chip span:hover { border-color: var(--muted); }
+.chip input:checked + span { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
+.chip input:disabled + span { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
+
+.sum { display: grid; gap: 4px; border-top: 1px solid var(--line); padding-top: 16px; }
+.sum b { font-weight: 400; font-stretch: 112%; font-size: 1rem; }
+.price { font-family: var(--mono); font-size: 0.875rem; color: var(--muted); }
+.btn { width: 100%; cursor: pointer; }
+.lab { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; font-size: 0.875rem; color: var(--muted); line-height: 1.5; margin: 0; }
+.lab svg { width: 18px; height: 18px; margin-top: 2px; color: var(--copper); }
+
+@media (prefers-reduced-motion: reduce) { .obj, .room .onwall { transition: none; } }
+.atelier-head p { margin: 0; color: var(--muted); font-size: 0.9375rem; max-width: 52ch; }
+.btn[aria-busy="true"] { opacity: .6; pointer-events: none; }
+.legal { font-size: 0.8125rem; color: var(--muted); margin: 0; line-height: 1.5; }
+.legal a { color: inherit; }
+.order .from-list li span:first-child { color: var(--fg); }
