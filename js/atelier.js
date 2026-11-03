@@ -23,6 +23,7 @@
       "tirage|30x45|2": "https://buy.stripe.com/6oU7sNcsj4bBe3CePh6wE03",
       "tirage|40x60|0": "https://buy.stripe.com/eVq8wR0JB5fF9Nm9uX6wE04",
       "tirage|40x60|2": "https://buy.stripe.com/cNi14p9g7azZ0cMcH96wE05",
+      "toile|30x45|0": "https://buy.stripe.com/00w00ldwnazZ9Nm6iL6wE0g",
       "toile|40x60|0": "https://buy.stripe.com/9B6fZj4ZRgYngbK0Yr6wE06",
       "cadre|30x45|0": "https://buy.stripe.com/7sY7sN0JB9vV8JifTl6wE07",
       "cadre|30x45|3": "https://buy.stripe.com/3cI28t0JB23tbVu9uX6wE08",
@@ -45,7 +46,7 @@
   // Supports : bordure visible (cm), jour (cm), profondeur (cm), prix de vente (€) par format.
   // Prix WhiteWall TTC relevés le 3 nov. 2026, port France WhiteWall inclus, arrondi à l'euro supérieur.
   // tirage (Fuji Crystal DP II) : × 2 + port → 10,95×2 + 8,95 = 31 · 13,95×2 + 8,95 = 37 · 16,95×2 + 8,95 = 43
-  // toile mate 40×60 : 66,95×1,5 + 14,95 = 116
+  // toile mate : 30×45 46,95×1,5 + 14,95 = 86 · 40×60 66,95×1,5 + 14,95 = 116
   // cadre Hambourg 20 mm noir mat + Alu Dibond : 129,95×1,5 + 14,95 = 210 · 178,95×1,5 + 19,95 = 289
   // caisse Bâle 15 mm noir mat + Alu Dibond : 153,95×1,5 + 14,95 = 246 · 189,95×1,5 + 19,95 = 305
   // fichier HD : 25 € (le 20×30 imprimé et livré coûte 31 €, pour inciter au tirage)
@@ -54,7 +55,7 @@
   //   cadre 153,95×1,5 + 14,95 = 246 · 204,95×1,5 + 19,95 = 328 · caisse 170,95×1,5 + 14,95 = 272 · 218,95×1,5 + 19,95 = 349
   const SUPPORTS = {
     tirage:  { name: "Tirage photo",            lip: 0,   gap: 0,   depth: 0.1, prices: { "20x30": 31, "30x45": 37, "40x60": 43 }, border: 2, pricesBorder: { "20x30": 33, "30x45": 37, "40x60": 48 } },
-    toile:   { name: "Toile",                   lip: 0,   gap: 0,   depth: 2.0, prices: { "40x60": 116 } },
+    toile:   { name: "Toile",                   lip: 0,   gap: 0,   depth: 2.0, prices: { "30x45": 86, "40x60": 116 } },
     cadre:   { name: "Cadre noir",              lip: 2.0, gap: 0,   depth: 3.0, prices: { "30x45": 210, "40x60": 289 }, border: 3, pricesBorder: { "30x45": 246, "40x60": 328 } },
     caisse:  { name: "Caisse américaine noire", lip: 1.5, gap: 0.7, depth: 2.9, prices: { "30x45": 246, "40x60": 305 }, border: 3, pricesBorder: { "30x45": 272, "40x60": 349 } },
     fichier: { name: "Fichier numérique haute définition", lip: 0, gap: 0, depth: 0.1, prices: { hd: 25 }, digital: true },
