@@ -54,12 +54,12 @@
 .s-tirage .side-l, .s-tirage .side-t { background: var(--paper); }
 
 /* Vue dans la pièce */
-.room { position: absolute; inset: 0; isolation: isolate; background: #e6dccd url("../img/piece-salon.jpg") center / cover no-repeat; }
+.room { position: absolute; inset: 0; isolation: isolate; background: #e6dccd url("../img/piece-salon.jpg?v=2") center / cover no-repeat; }
 /* Ombre du soleil : visible seulement là où le mur reçoit le soleil (masque tiré de la photo) */
-.sunshade { position: absolute; inset: 0; pointer-events: none; -webkit-mask: url("../img/piece-soleil.png") 0 0 / 100% 100% no-repeat; mask: url("../img/piece-soleil.png") 0 0 / 100% 100% no-repeat; }
+.sunshade { position: absolute; inset: 0; pointer-events: none; -webkit-mask: url("../img/piece-soleil.png?v=2") 0 0 / 100% 100% no-repeat; mask: url("../img/piece-soleil.png?v=2") 0 0 / 100% 100% no-repeat; }
 .cast-sun { position: absolute; background: rgb(24 14 4 / 0.26); filter: blur(var(--sb, 1px)); transition: all .35s ease; }
 /* Lumière du mur reportée sur le tirage (zones au soleil / à l'ombre) */
-.light { position: absolute; inset: 0; pointer-events: none; background: url("../img/piece-lumiere.jpg") 0 0 / 100% 100% no-repeat; mix-blend-mode: multiply; opacity: .9; }
+.light { position: absolute; inset: 0; pointer-events: none; background: url("../img/piece-lumiere.jpg?v=2") 0 0 / 100% 100% no-repeat; mix-blend-mode: multiply; opacity: .9; }
 .room.no-sun .sunshade, .room.no-sun .light { display: none; }
 .toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--muted); }
 .toggle input { width: 14px; height: 14px; margin: 0; accent-color: var(--fg); }

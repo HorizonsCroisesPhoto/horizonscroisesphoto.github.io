@@ -68,7 +68,9 @@
   // Géométrie de la photo de pièce (1448 × 965 px). Échelle estimée d'après le buffet (≈ 60 cm de haut) :
   // 5,05 px/cm au mur, appareil à ≈ 2,95 m. Centre du tirage à 1,10 m du sol, à gauche du vase.
   // ppx/ppy : axe de l'appareil. sunDx/sunDy : décalage de l'ombre portée par cm de profondeur.
-  const ROOM = { w: 1448, pxPerCm: 5.05, camDistCm: 295, wallX: 650, wallY: 326.5, ppx: 199, ppy: 579, sunDx: 1.9, sunDy: 0.35 };
+  // Photo retouchée (nov. 2026) : buffet bas réduit et décalé à droite, plus de mur libre.
+  // Échelle : buffet bas ≈ 39 cm de haut → 6,3 px/cm au mur. Tirage centré sur le mur libre, au-dessus du bout gauche du buffet.
+  const ROOM = { w: 1448, pxPerCm: 6.3, camDistCm: 295, wallX: 620, wallY: 350, ppx: 311, ppy: 656, sunDx: 1.9, sunDy: 0.35 };
 
   const $ = (id) => document.getElementById(id);
   const form = $("order");
