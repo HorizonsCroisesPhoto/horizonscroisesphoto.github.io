@@ -1,10 +1,18 @@
 (() => {
   const root = document.getElementById("tirage");
   if (!root) return;
-  const PHOTO = root.dataset.photo;
-  const PHOTO_SM = root.dataset.photoSm || PHOTO;
-  const REF = root.dataset.ref || "";
-  const PORTRAIT = root.dataset.orient === "portrait";
+  // Photo affichée : lue sur la section #tirage ; window.atelier.set() permet d'en changer
+  // (page des Sourires d'Anosibe : un configurateur pour les 50 portraits).
+  // data-sizes (facultatif) limite les formats proposés, ex. "20x30" pour un recadrage serré.
+  let PHOTO, PHOTO_SM, REF, PORTRAIT, ALLOWED;
+  function load() {
+    PHOTO = root.dataset.photo;
+    PHOTO_SM = root.dataset.photoSm || PHOTO;
+    REF = root.dataset.ref || "";
+    PORTRAIT = root.dataset.orient === "portrait";
+    ALLOWED = root.dataset.sizes ? root.dataset.sizes.split(",") : null;
+  }
+  load();
 
   // Liens de paiement Stripe (un par support / format / bord blanc). La référence de l'œuvre
   // est transmise avec client_reference_id et apparaît sur le paiement dans le Dashboard Stripe.
@@ -173,15 +181,28 @@
     $("light").style.clipPath = `inset(${T}px ${box.clientWidth - L - w}px ${box.clientHeight - T - h}px ${L}px)`;
   }
 
+  // formats proposés pour la photo affichée (le fichier HD reste toujours disponible)
+  const sizesOf = (s) => s.sizes.filter((z) => z === "hd" || !ALLOWED || ALLOWED.includes(z));
+
   function update() {
+    // supports disponibles pour cette photo
+    for (const inp of form.querySelectorAll('input[name="support"]')) {
+      inp.disabled = sizesOf(SUPPORTS[inp.value]).length === 0;
+      inp.closest(".opt").classList.toggle("is-off", inp.disabled);
+    }
+    if (form.querySelector('input[name="support"]:checked').disabled) {
+      form.querySelector('input[name="support"][value="tirage"]').checked = true;
+    }
     const st0 = state();
+    const avail = sizesOf(st0.s);
     // formats disponibles selon le support
     for (const inp of form.querySelectorAll('input[name="size"]')) {
-      inp.disabled = !st0.s.sizes.includes(inp.value);
+      inp.disabled = !avail.includes(inp.value);
     }
-    if (!st0.s.sizes.includes(form.size.value)) {
-      form.querySelector(`input[name="size"][value="${st0.s.sizes[0]}"]`).checked = true;
+    if (!avail.includes(form.size.value)) {
+      form.querySelector(`input[name="size"][value="${avail[0]}"]`).checked = true;
     }
+    $("sizeNote") && ($("sizeNote").hidden = !ALLOWED);
     const st = state();
     const file = !!st.s.digital;
     $("formats").hidden = file;
@@ -220,4 +241,15 @@
   ro.observe($("screen3d"));
   ro.observe($("screenRoom"));
   update();
+
+  window.atelier = {
+    // ds : { photo, photoSm, ref, orient, sizes } — mêmes clés que les attributs data-* de #tirage
+    set(ds) {
+      for (const k of ["photo", "photoSm", "ref", "orient", "sizes"]) {
+        if (ds[k]) root.dataset[k] = ds[k]; else delete root.dataset[k];
+      }
+      load();
+      update();
+    },
+  };
 })();

@@ -2,22 +2,22 @@
 @font-face { font-family: "Newsreader"; font-style: italic; font-weight: 200 800; font-display: swap; src: url("../fonts/newsreader-var-italic.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/plex-mono-400.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/plex-mono-500.woff2") format("woff2"); }
-/* Layout: "salle de départ" — one photograph fills the arrival screen on a warm cream
-   ground (charte des galeries Pic-Time : crème, pêche, brun, cuivre); series are listed like boarding cards (escale, couverture, série, statut). */
+/* Layout: "salle de départ" — one photograph fills the arrival screen on a black
+   ground; series are listed like boarding cards (escale, couverture, série, statut). */
 :root {
-  /* Charte reprise de la galerie Pic-Time « Les sourires d'Anosibe » */
-  --bg: #fef9f6;        /* fond crème */
-  --panel: #fceee4;     /* bande pêche (couverture des galeries) */
-  --panel-2: #fae6d6;
-  --fg: #381800;        /* brun foncé : textes */
-  --muted: #74594a;
-  --line: #efdccd;
-  --copper: #b57245;    /* cuivre : accent décoratif */
-  --blue: #8f5129;      /* cuivre foncé : liens et accents de texte (contraste suffisant) */
-  --ochre: #9a5b31;
+  /* Thème sombre : les photos ressortent sur un fond presque noir */
+  --bg: #0b0b0c;        /* fond presque noir */
+  --panel: #151517;     /* panneaux */
+  --panel-2: #111113;
+  --fg: #ecebe7;        /* textes */
+  --muted: #8e8d89;
+  --line: #2a2a2e;
+  --copper: #e39a4f;    /* ocre : accent décoratif */
+  --blue: #5fafd9;      /* bleu : liens et accents */
+  --ochre: #e39a4f;
   /* Texte posé sur une photo (légende de l'accueil) : reste clair */
-  --on-photo: #fef9f6;
-  --ochre-on-photo: #e8ac80;
+  --on-photo: #ecebe7;
+  --ochre-on-photo: #e39a4f;
   --display: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -29,7 +29,7 @@
   --gutter: clamp(16px, 4vw, 56px);
   --wrap: 1320px;
   --header: 76px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -73,7 +73,7 @@ h1 { font-size: var(--step-3); font-weight: 300; }
 h2 { font-size: var(--step-2); font-weight: 300; }
 h3 { font-size: var(--step-1); }
 .lede { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.3rem, 1.05rem + 0.9vw, 1.75rem); line-height: 1.38; max-width: 36ch; margin: 0; }
-.prose { max-width: 62ch; display: grid; gap: 1em; color: var(--fg); }
+.prose { max-width: 62ch; display: grid; gap: 1em; color: color-mix(in srgb, var(--fg) 86%, var(--bg)); }
 .prose p { margin: 0; }
 .label { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0; }
 
@@ -93,14 +93,14 @@ main { display: block; }
 
 /* Arrival screen (home) */
 .arrival { display: grid; grid-template-columns: minmax(320px, 4fr) minmax(0, 6fr); min-height: calc(100svh - var(--header)); border-bottom: 1px solid var(--line); }
-.arrival-text { background: var(--panel); display: flex; flex-direction: column; justify-content: center; gap: 40px; padding: clamp(32px, 4vw, 64px) var(--gutter); min-width: 0; }
+.arrival-text { display: flex; flex-direction: column; justify-content: center; gap: 40px; padding: clamp(32px, 4vw, 64px) var(--gutter); min-width: 0; }
 .arrival-text .bio { display: grid; gap: 2px; }
 .arrival-text h1 { font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem); font-weight: 400; letter-spacing: 0.2em; color: var(--muted); }
 .arrival figure { margin: 0; position: relative; min-width: 0; overflow: hidden; background: var(--panel); }
 .arrival figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; animation: arrive 2.4s cubic-bezier(.2,.6,.2,1) both; }
-.arrival figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 48px var(--gutter) 22px; background: linear-gradient(to top, rgb(56 24 0 / 0.78), rgb(56 24 0 / 0)); }
+.arrival figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 48px var(--gutter) 22px; background: linear-gradient(to top, rgb(11 11 12 / 0.82), rgb(11 11 12 / 0)); }
 .arrival figcaption .strip { color: var(--on-photo); }
-.arrival figcaption .strip li + li::before { color: rgb(254 249 246 / 0.6); }
+.arrival figcaption .strip li + li::before { color: var(--muted); }
 .arrival figcaption .code { color: var(--ochre-on-photo); border-color: var(--ochre-on-photo); }
 @keyframes arrive { from { transform: scale(1.045); } to { transform: scale(1); } }
 @media (max-width: 860px) {
@@ -115,7 +115,7 @@ main { display: block; }
 .dep-cover { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--panel); border: 1px solid var(--line); }
 .dep-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
 a.dep:hover .dep-cover img { transform: scale(1.035); }
-.dep-cover .code { position: absolute; top: 14px; left: 14px; font-family: var(--mono); font-size: var(--step--1); background: rgb(254 249 246 / 0.88); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.dep-cover .code { position: absolute; top: 14px; left: 14px; font-family: var(--mono); font-size: var(--step--1); background: rgb(11 11 12 / 0.74); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .dep-body { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
 .dep-title { font-size: clamp(1.15rem, 0.95rem + 0.8vw, 1.6rem); font-weight: 300; transition: color .2s ease; }
 a.dep:hover .dep-title { color: var(--blue); }
@@ -150,11 +150,11 @@ a.dep:hover .dep-title { color: var(--blue); }
 .thanks { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 .thanks h2 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--step-3); letter-spacing: 0; text-transform: none; }
 @media (max-width: 860px) { .thanks { grid-template-columns: minmax(0, 1fr); } }
-.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgb(254 249 246 / 0.97); color: var(--fg); }
-.lightbox::backdrop { background: rgb(254 249 246 / 0.9); }
+.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgb(11 11 12 / 0.96); color: var(--fg); }
+.lightbox::backdrop { background: rgb(11 11 12 / 0.9); }
 .lightbox[open] { display: grid; place-items: center; }
 .lightbox img { max-width: calc(100vw - 32px); max-height: calc(100dvh - 120px); width: auto; height: auto; }
-.lightbox button { position: absolute; background: rgb(254 249 246 / 0.7); color: var(--fg); border: 1px solid var(--line); width: 48px; height: 48px; font-size: 1.75rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.lightbox button { position: absolute; background: rgb(11 11 12 / 0.6); color: var(--fg); border: 1px solid var(--line); width: 48px; height: 48px; font-size: 1.75rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
 .lightbox button:hover { border-color: var(--fg); }
 .lb-close { top: 16px; right: 16px; }
 .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
@@ -203,3 +203,11 @@ a.dep:hover .dep-title { color: var(--blue); }
 .todo { background: color-mix(in srgb, var(--ochre) 22%, transparent); color: var(--fg); padding: 0 4px; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* Intro des galeries (séries) : texte centré sur la page */
+.series-intro { display: grid; gap: 24px; justify-items: center; text-align: center; max-width: 72ch; margin-inline: auto; }
+.series-intro .strip, .series-intro .actions { justify-content: center; }
+.series-intro .lede { max-width: 40ch; }
+.series-intro .prose, .series-intro .charity { margin-inline: auto; }
+.series-intro .charity { border-left: 0; padding: 0; color: var(--copper); }
+.crumbs:has(+ .series-intro) { text-align: center; }
