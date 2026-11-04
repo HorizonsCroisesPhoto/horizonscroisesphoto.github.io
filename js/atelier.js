@@ -61,9 +61,30 @@
     fichier: { name: "Fichier numérique haute définition", lip: 0, gap: 0, depth: 0.1, prices: { hd: 25 }, digital: true },
   };
   for (const s of Object.values(SUPPORTS)) s.sizes = Object.keys(s.prices);
+
+  // Textes de l'interface : français, ou anglais sur les pages /en/ (<html lang="en">)
+  const EN = document.documentElement.lang === "en";
+  const T = EN ? {
+    names: { tirage: "Photo print", toile: "Canvas", cadre: "Black frame", caisse: "Black floating frame", fichier: "High-resolution digital file" },
+    eur: (n) => "€" + n, from: (n) => "from €" + n,
+    border: (cm, d) => `${cm} cm around the image · ${d ? `+€${d}` : "no extra charge"}`,
+    withBorder: (cm) => `, white border ${cm} cm`,
+    shipFile: "Sent as a download link after payment. Private use only; the photograph remains protected by copyright.",
+    shipPrint: "Free shipping within France. Other countries: on request.",
+    capFile: "HD digital file",
+  } : {
+    names: {},
+    eur: (n) => n + " €", from: (n) => "dès " + n + " €",
+    border: (cm, d) => `${cm} cm autour de l'image · ${d ? `+${d} €` : "sans supplément"}`,
+    withBorder: (cm) => `, bord blanc ${cm} cm`,
+    shipFile: "Envoyé par lien de téléchargement après paiement. Usage privé uniquement, la photo reste protégée par le droit d'auteur.",
+    shipPrint: "Frais de port inclus pour une livraison en France. Autres pays : sur demande.",
+    capFile: "Fichier numérique HD",
+  };
+  for (const [k, n] of Object.entries(T.names)) SUPPORTS[k].name = n;
   for (const el of document.querySelectorAll("[data-from]")) {
     const p = Object.values(SUPPORTS[el.dataset.from].prices);
-    el.textContent = (p.length > 1 ? "dès " : "") + Math.min(...p) + " €";
+    el.textContent = p.length > 1 ? T.from(Math.min(...p)) : T.eur(p[0]);
   }
 
   // Géométrie de la photo de pièce (1448 × 965 px). Échelle estimée d'après le buffet (≈ 60 cm de haut) :
@@ -213,15 +234,13 @@
     $("finish").hidden = !st.s.border;
     if (st.s.border) {
       const delta = st.s.pricesBorder[st.size] - st.s.prices[st.size];
-      $("borderInfo").textContent = `${st.s.border} cm autour de l'image · ${delta ? `+${delta} €` : "sans supplément"}`;
+      $("borderInfo").textContent = T.border(st.s.border, delta);
     }
     const price = st.b ? st.s.pricesBorder[st.size] : st.s.prices[st.size];
-    $("sumLabel").textContent = file ? st.s.name : `${st.s.name}, ${st.z.label}${st.b ? `, bord blanc ${st.b} cm` : ""}`;
-    $("price").textContent = `${price} €`;
-    $("shipNote").textContent = file
-      ? "Envoyé par lien de téléchargement après paiement. Usage privé uniquement, la photo reste protégée par le droit d'auteur."
-      : "Frais de port inclus pour une livraison en France. Autres pays : sur demande.";
-    $("cap3d").textContent = file ? "Fichier numérique HD" : `${st.s.name} · ${st.z.label}`;
+    $("sumLabel").textContent = file ? st.s.name : `${st.s.name}, ${st.z.label}${st.b ? T.withBorder(st.b) : ""}`;
+    $("price").textContent = T.eur(price);
+    $("shipNote").textContent = file ? T.shipFile : T.shipPrint;
+    $("cap3d").textContent = file ? T.capFile : `${st.s.name} · ${st.z.label}`;
     $("room").classList.toggle("is-file", file);
     $("roomMsg").hidden = !file;
     render3d(st);

@@ -221,3 +221,27 @@ a.dep:hover .dep-title { color: var(--blue); }
 .site-header .nav a { color: var(--hdr-muted); }
 .site-header .nav a:hover, .site-header .nav a[aria-current="page"] { color: var(--hdr-fg); border-bottom-color: var(--hdr-fg); }
 .site-header :focus-visible { outline-color: var(--hdr-fg); }
+
+/* Sélecteur de langue FR / EN (drapeaux) */
+.lang { display: flex; gap: 14px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em; }
+.lang a { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; color: var(--hdr-muted, var(--muted)); padding-block: 6px; border-bottom: 1px solid transparent; }
+.lang a:hover, .lang a[aria-current] { color: var(--hdr-fg, var(--fg)); border-bottom-color: var(--hdr-fg, var(--fg)); }
+.lang a:not([aria-current]) .flag { opacity: 0.75; }
+.lang a:hover .flag { opacity: 1; }
+.lang .flag { width: 18px; height: 12px; flex: none; display: block; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.15); }
+.site-header .nav { margin-left: auto; }
+@media (max-width: 640px) {
+  .site-header .wrap { column-gap: 10px; }
+  .site-header .brand { gap: 10px; }
+  .site-header .brand img { width: 44px; }
+  .site-header .lang { order: 1; margin-left: auto; gap: 10px; }
+  .site-header .nav { order: 2; width: 100%; margin-left: 0; }
+  .lang a { padding: 8px 2px; }
+  .lang a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .lang .flag { width: 22px; height: 15px; }
+}
+@media (max-width: 380px) {
+  .site-header .brand img { width: 38px; }
+  .site-header .brand b { letter-spacing: 0.1em; font-size: 0.8125rem; }
+  .site-header .brand b span { letter-spacing: 0.26em; }
+}
