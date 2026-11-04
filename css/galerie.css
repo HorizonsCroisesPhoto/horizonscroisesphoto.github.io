@@ -102,3 +102,9 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 @media (max-width: 640px) { .g-lb-stage { padding: 0 8px; } .g-lb-actions .btn { flex: 1 1 100%; } .g-lb-stage img { max-height: calc(100dvh - 300px); } .g-lb button.g-nav { display: none; } .g-grid { columns: 2 140px; } }
 /* Nom du concours sur une seule ligne dans la liste */
 .eq-card .dep-title { font-size: clamp(1.05rem, 0.9rem + 0.45vw, 1.3rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Rubriques de la page Art équestre */
+.eq-sec { margin-top: clamp(40px, 6vw, 72px); }
+.eq-sec + .eq-sec { border-top: 1px solid var(--line); padding-top: clamp(40px, 6vw, 72px); }
+.eq-sec-h { text-align: center; margin: 0 0 clamp(20px, 2.6vw, 32px); }
+.eq-sec .eq-cards { margin-top: 0; }
+.eq-empty { text-align: center; color: var(--muted); margin: 0; }

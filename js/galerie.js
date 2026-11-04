@@ -56,21 +56,34 @@
   const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
 
   // ----- page d'entrée : liste des galeries
-  function buildIndex(list) {
-    const ul = $("#g-list");
-    for (const g of list) {
-      const li = el("li"), a = el("a", "dep eq-card"); a.href = g.slug + "/";
-      const cov = el("span", "dep-cover"), img = el("img");
-      img.alt = "Couverture de la galerie " + g.title; img.width = 720; img.height = 900;
-      img.dataset.file = g.slug + "/c.bin"; cov.appendChild(img); io.observe(img);
-      const body = el("span", "dep-body");
-      body.appendChild(el("h2", "dep-title", g.title));
-      const meta = el("span", "dep-meta");
-      meta.append(el("span", null, g.date), el("span", null, g.n + " photos"), el("span", "status", "Voir la galerie →"));
-      body.appendChild(meta);
-      a.append(cov, body); li.appendChild(a); ul.appendChild(li);
+  function buildIndex(data) {
+    const out = $("#g-list");
+    // rubriques (Concours, Entraînements aux écuries…) ; ancien format : simple liste
+    const rubriques = Array.isArray(data) && data.length && data[0].g ? data : [{ t: "", g: data }];
+    for (const r of rubriques) {
+      const sec = el("section", "eq-sec");
+      if (r.t) sec.appendChild(el("h2", "eq-sec-h", r.t));
+      if (!r.g.length) {
+        sec.appendChild(el("p", "eq-empty", "Les galeries arrivent bientôt."));
+        out.appendChild(sec);
+        continue;
+      }
+      const ul = el("ul", "departures eq-cards");
+      for (const g of r.g) {
+        const li = el("li"), a = el("a", "dep eq-card"); a.href = g.slug + "/";
+        const cov = el("span", "dep-cover"), img = el("img");
+        img.alt = "Couverture de la galerie " + g.title; img.width = 720; img.height = 900;
+        img.dataset.file = g.slug + "/c.bin"; cov.appendChild(img); io.observe(img);
+        const body = el("span", "dep-body");
+        body.appendChild(el("h3", "dep-title", g.title));
+        const meta = el("span", "dep-meta");
+        meta.append(el("span", null, g.date), el("span", null, g.n + " photos"), el("span", "status", "Voir la galerie →"));
+        body.appendChild(meta);
+        a.append(cov, body); li.appendChild(a); ul.appendChild(li);
+      }
+      sec.appendChild(ul); out.appendChild(sec);
     }
-    ul.hidden = false;
+    out.hidden = false;
   }
 
   // ----- galerie
