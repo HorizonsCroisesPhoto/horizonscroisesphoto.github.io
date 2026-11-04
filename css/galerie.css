@@ -100,3 +100,5 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 .g-lb .g-wait { position: absolute; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .g-lb .btn svg { width: 14px; height: 14px; }
 @media (max-width: 640px) { .g-lb-stage { padding: 0 8px; } .g-lb-actions .btn { flex: 1 1 100%; } .g-lb-stage img { max-height: calc(100dvh - 300px); } .g-lb button.g-nav { display: none; } .g-grid { columns: 2 140px; } }
+/* Nom du concours sur une seule ligne dans la liste */
+.eq-card .dep-title { font-size: clamp(1.05rem, 0.9rem + 0.45vw, 1.3rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
