@@ -61,7 +61,7 @@
     for (const g of list) {
       const li = el("li"), a = el("a", "dep eq-card"); a.href = g.slug + "/";
       const cov = el("span", "dep-cover"), img = el("img");
-      img.alt = "Couverture de la galerie " + g.title; img.width = 900; img.height = 600;
+      img.alt = "Couverture de la galerie " + g.title; img.width = 720; img.height = 900;
       img.dataset.file = g.slug + "/c.bin"; cov.appendChild(img); io.observe(img);
       const body = el("span", "dep-body");
       body.appendChild(el("h2", "dep-title", g.title));

@@ -18,7 +18,11 @@
 [hidden] { display: none !important; }
 
 /* Liste des galeries */
-.eq-cards { margin-top: clamp(8px, 2vw, 24px); }
+.eq-cards { margin-top: clamp(8px, 2vw, 24px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 380px)); justify-content: center; }
+.eq-card .dep-cover { aspect-ratio: 4 / 5; }
+.eq-logo { display: block; line-height: 0; transition: opacity .2s ease; }
+.eq-logo:hover { opacity: .85; }
+.eq-logo img { width: clamp(160px, 22vw, 220px); height: auto; }
 .eq-card .dep-cover img { opacity: 0; transition: opacity .4s ease, transform .7s cubic-bezier(.2,.6,.2,1); }
 .eq-card .dep-cover img.is-in { opacity: 1; }
 
