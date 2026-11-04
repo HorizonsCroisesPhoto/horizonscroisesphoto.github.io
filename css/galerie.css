@@ -104,7 +104,8 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 .eq-card .dep-title { font-size: clamp(1.05rem, 0.9rem + 0.45vw, 1.3rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* Rubriques de la page Art équestre */
 .eq-sec { margin-top: clamp(40px, 6vw, 72px); }
-.eq-sec + .eq-sec { border-top: 1px solid var(--line); padding-top: clamp(40px, 6vw, 72px); }
-.eq-sec-h { text-align: center; margin: 0 0 clamp(20px, 2.6vw, 32px); }
+.eq-sec + .eq-sec { margin-top: clamp(56px, 8vw, 96px); }
+.eq-sec-h { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); text-align: center; margin: 0 0 clamp(24px, 3vw, 40px); }
+.eq-sec-h::before, .eq-sec-h::after { content: ""; flex: 1 1 24px; min-width: 24px; height: 1px; background: var(--fg); opacity: 0.35; }
 .eq-sec .eq-cards { margin-top: 0; }
 .eq-empty { text-align: center; color: var(--muted); margin: 0; }
