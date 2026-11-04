@@ -253,3 +253,7 @@ a.dep:hover .dep-title { color: var(--blue); }
 /* Accueil : les trois portes d'entrée (Galerie d'art, Art équestre, Événements) empilées, même largeur */
 .arrival-text .actions { display: grid; grid-template-columns: minmax(0, max-content); gap: 10px; }
 .arrival-text .actions .btn { justify-content: space-between; }
+
+/* Bouton « Événements » : rose poudré (mariages, anniversaires), en accord avec le doré et l'ivoire */
+.btn--event { --event: #dcb8ae; background: var(--event); border-color: var(--event); color: #0b0b0c; }
+.btn--event:hover { background: transparent; border-color: var(--event); color: var(--event); }
