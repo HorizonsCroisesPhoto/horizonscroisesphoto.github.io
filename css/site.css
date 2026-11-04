@@ -257,3 +257,8 @@ a.dep:hover .dep-title { color: var(--blue); }
 /* Bouton « Événements » : rose poudré (mariages, anniversaires), en accord avec le doré et l'ivoire */
 .btn--event { --event: #dcb8ae; background: var(--event); border-color: var(--event); color: #0b0b0c; }
 .btn--event:hover { background: transparent; border-color: var(--event); color: var(--event); }
+
+/* À propos : portrait en noir et blanc sous le titre */
+.about-portrait { margin: 8px 0 0; max-width: 440px; }
+.about-portrait img { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .about-portrait { max-width: 100%; } }
