@@ -259,6 +259,16 @@ a.dep:hover .dep-title { color: var(--blue); }
 .btn--event:hover { background: transparent; border-color: var(--event); color: var(--event); }
 
 /* À propos : portrait en noir et blanc sous le titre */
-.about-portrait { margin: 8px 0 0; max-width: 440px; }
+.about { align-items: center; }
+.about-head { grid-column: 1 / -1; display: grid; gap: 24px; }
+.about-head .lede { max-width: none; }
+.about-portrait { margin: 0; max-width: 460px; }
 .about-portrait img { width: 100%; height: auto; display: block; }
 @media (max-width: 860px) { .about-portrait { max-width: 100%; } }
+
+/* Page claire (À propos) : papier ivoire, textes ardoise, bleu du logo, comme les galeries clients */
+html.page-light {
+  --bg: #f5f2ec; --panel: #fcfbf8; --panel-2: #ece7de; --fg: #1d2a33; --muted: #66717a; --line: #dcd5ca;
+  --blue: #1e6fa6; --copper: #c4643a; --ochre: #c4643a; color-scheme: light;
+}
+html.page-light .lede { color: #3b4a54; }
