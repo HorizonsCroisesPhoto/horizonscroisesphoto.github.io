@@ -11,7 +11,7 @@
   const SALT = b64(root.dataset.salt), ITER = +root.dataset.iter;
   const IS_INDEX = "index" in root.dataset;
   const PAYLOAD = b64(IS_INDEX ? root.dataset.index : root.dataset.manifest);
-  const KEYNAME = "hc-galeries-mdp";
+  const KEYNAME = root.dataset.store || "hc-galeries-mdp"; // un mot de passe par rubrique ou par événement
   let key = null, photos = [], cur = 0, show = () => {};
 
   async function derive(pw) {
@@ -88,13 +88,23 @@
 
   // ----- galerie
   function buildGallery(m) {
-    document.title = m.title + " · " + m.date + " · Art équestre · Horizons Croisés";
+    document.title = m.title + " · " + m.date + " · " + (root.dataset.rubrique || "Art équestre") + " · Horizons Croisés";
     const h1 = $("#g-title"); h1.textContent = m.title; h1.hidden = false;
     $("#g-crumb").textContent = " / " + m.title;
     const strip = $("#g-strip");
     strip.append(el("li", null, m.date), el("li", null, m.n + " photos"));
     strip.hidden = false;
     $("#g-help").hidden = false;
+    // galeries d'événements : grande photo de couverture et lien vers les fichiers HD (kDrive)
+    const hero = $("#g-hero");
+    if (hero && m.cover) {
+      const img = $("img", hero); img.alt = m.title;
+      img.onload = () => img.classList.add("is-in");
+      blobUrl(m.cover).then((u) => { img.src = u; }).catch(() => {});
+      hero.hidden = false;
+    }
+    const hd = $("#g-hd");
+    if (hd && m.hd) { $("a", hd).href = m.hd; hd.hidden = false; }
     const out = $("#g-content");
     out.hidden = false;
     photos = [];
@@ -111,7 +121,7 @@
       for (const ph of s.photos) {
         const i = photos.push(ph) - 1;
         const b = el("button"); b.type = "button";
-        b.setAttribute("aria-label", "Agrandir la photo n° " + ph.no);
+        b.setAttribute("aria-label", "Agrandir la photo " + (ph.sec ? ph.sec + " " : "n° ") + ph.no);
         const img = el("img"); img.alt = ""; img.width = ph.tw; img.height = ph.th;
         img.dataset.file = ph.t;
         b.appendChild(img); grid.appendChild(b);
@@ -137,7 +147,7 @@
     show = async (i) => {
       cur = (i + photos.length) % photos.length;
       const ph = photos[cur];
-      $(".g-lb-count", lb).textContent = "Photo n° " + ph.no + " · " + (cur + 1) + " / " + photos.length;
+      $(".g-lb-count", lb).textContent = (ph.sec ? ph.sec + " · photo n° " : "Photo n° ") + ph.no + " · " + (cur + 1) + " / " + photos.length;
       if (!lb.open) lb.showModal();
       lbImg.removeAttribute("src"); wait.hidden = false; dl.removeAttribute("href");
       buy.hidden = ph.s === "-"; // définition trop faible pour un tirage : téléchargement seul
@@ -165,7 +175,8 @@
     const sec = $("#tirage");
     if (!sec || !window.atelier) return;
     ordered = ph;
-    $("#g-ono").textContent = ph.no;
+    if (ph.sec) $("#h-atelier").textContent = ph.sec + " · photo n° " + ph.no + " · Choisir son tirage";
+    else $("#g-ono").textContent = ph.no;
     const note = $("#sizeNote");
     if (note) note.textContent = ph.s ? "Pour garder une impression de qualité, cette photo est proposée jusqu'au " + ph.s.split(",").pop().replace("x", " × ") + " cm." : "";
     sec.hidden = false;

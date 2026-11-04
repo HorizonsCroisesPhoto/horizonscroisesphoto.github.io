@@ -249,3 +249,7 @@ a.dep:hover .dep-title { color: var(--blue); }
 /* Bouton « Art équestre » : doré du logo de l'Écurie de Rouvre (#b49b61) */
 .btn--rouvre { --rouvre: #b49b61; background: var(--rouvre); border-color: var(--rouvre); color: #0b0b0c; }
 .btn--rouvre:hover { background: transparent; border-color: var(--rouvre); color: var(--rouvre); }
+
+/* Accueil : les trois portes d'entrée (Galerie d'art, Art équestre, Événements) empilées, même largeur */
+.arrival-text .actions { display: grid; grid-template-columns: minmax(0, max-content); gap: 10px; }
+.arrival-text .actions .btn { justify-content: space-between; }

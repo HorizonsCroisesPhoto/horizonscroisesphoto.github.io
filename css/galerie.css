@@ -109,3 +109,11 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 .eq-sec-h::before, .eq-sec-h::after { content: ""; flex: 1 1 24px; min-width: 24px; height: 1px; background: var(--fg); opacity: 0.35; }
 .eq-sec .eq-cards { margin-top: 0; }
 .eq-empty { text-align: center; color: var(--muted); margin: 0; }
+/* Événements : couverture façon Pic-Time, cartes privées, lien HD */
+.ev-hero { margin: 0 0 clamp(24px, 4vw, 48px); background: var(--panel-2); aspect-ratio: 16 / 9; overflow: hidden; }
+.ev-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+.ev-hero img.is-in { opacity: 1; }
+.ev-cover { display: grid; place-items: center; background: linear-gradient(145deg, #e9edf0 0%, #f3ece4 55%, #f0e2d6 100%); }
+.ev-lock { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.ev-lock svg { width: 14px; height: 14px; }
+.ev-hd { margin: 0; }
