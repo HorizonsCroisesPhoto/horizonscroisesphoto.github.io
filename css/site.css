@@ -245,3 +245,7 @@ a.dep:hover .dep-title { color: var(--blue); }
   .site-header .brand b { letter-spacing: 0.1em; font-size: 0.8125rem; }
   .site-header .brand b span { letter-spacing: 0.26em; }
 }
+
+/* Bouton « Art équestre » : doré du logo de l'Écurie de Rouvre (#b49b61) */
+.btn--rouvre { --rouvre: #b49b61; background: var(--rouvre); border-color: var(--rouvre); color: #0b0b0c; }
+.btn--rouvre:hover { background: transparent; border-color: var(--rouvre); color: var(--rouvre); }
