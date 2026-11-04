@@ -1,6 +1,31 @@
 /* Art équestre : galeries réservées aux membres des Écuries de Rouvre, dans la charte du site (fond sombre).
    Liste des galeries et photos chiffrées, déchiffrées dans le navigateur après le mot de passe. */
 
+/* Ambiance claire des galeries clients (≠ galeries d'art sur fond noir), couleurs du logo :
+   bleu du cercle, ardoise et terre cuite des continents, sur un papier ivoire. */
+html.eq-light {
+  --bg: #f5f2ec;        /* papier ivoire */
+  --panel: #fcfbf8;
+  --panel-2: #ece7de;
+  --fg: #1d2a33;        /* ardoise des continents */
+  --muted: #66717a;
+  --line: #dcd5ca;
+  --blue: #1e6fa6;      /* bleu du cercle du logo */
+  --copper: #c4643a;    /* terre cuite des continents */
+  --ochre: #c4643a;
+  --scrim: 245 242 236;
+  color-scheme: light;
+}
+html.eq-light main::before { content: ""; display: block; height: 3px; background: linear-gradient(90deg, #1e6fa6, #4fa3d6 38%, #e39a4f 70%, #c4643a); }
+html.eq-light .eq-gate input { background: #fff; }
+html.eq-light .eq-gate .eq-err { color: #b3261e; }
+html.eq-light .lede { color: #3b4a54; }
+html.eq-light #screen3d { border-color: var(--line); }
+html.eq-light .room-msg { background: rgb(255 255 255 / 0.9); }
+html.eq-light .g-pop::backdrop { background: rgb(29 42 51 / 0.35); }
+html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
+
+
 /* Accès protégé */
 .eq-gate { display: grid; justify-items: center; gap: 14px; width: min(100%, 420px); margin: clamp(8px, 2vw, 20px) auto 0; text-align: center; }
 .eq-gate form { display: flex; width: 100%; gap: 8px; }
@@ -27,7 +52,7 @@
 .eq-card .dep-cover img.is-in { opacity: 1; }
 
 /* Galerie */
-.g-bar { position: sticky; top: 0; z-index: 3; background: rgb(11 11 12 / 0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.g-bar { position: sticky; top: 0; z-index: 3; background: rgb(var(--scrim, 11 11 12) / 0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
 .g-bar .wrap { display: flex; gap: 6px 22px; flex-wrap: wrap; align-items: center; min-height: 52px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .g-bar a { text-decoration: none; color: var(--muted); padding: 6px 0; border-bottom: 1px solid transparent; }
 .g-bar a:hover { color: var(--fg); border-bottom-color: var(--blue); }
@@ -43,8 +68,8 @@
 .g-note a { color: var(--fg); }
 
 /* Visionneuse (comme les autres galeries du site) */
-.g-lb { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgb(11 11 12 / 0.97); color: var(--fg); }
-.g-lb::backdrop { background: rgb(11 11 12 / 0.9); }
+.g-lb { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgb(var(--scrim, 11 11 12) / 0.98); color: var(--fg); }
+.g-lb::backdrop { background: rgb(var(--scrim, 11 11 12) / 0.9); }
 .g-lb[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
 .g-lb-top, .g-lb-bot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; }
 .g-lb-bot { flex-direction: column; justify-content: center; gap: 12px; padding-bottom: 18px; }
@@ -68,7 +93,7 @@
 .g-lb-count { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--muted); }
 .g-lb-stage { position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; padding: 0 72px; }
 .g-lb-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 190px); width: auto; height: auto; object-fit: contain; }
-.g-lb button.g-x, .g-lb button.g-nav { background: rgb(11 11 12 / 0.6); color: var(--fg); border: 1px solid var(--line); width: 48px; height: 48px; font-size: 1.75rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.g-lb button.g-x, .g-lb button.g-nav { background: rgb(var(--scrim, 11 11 12) / 0.7); color: var(--fg); border: 1px solid var(--line); width: 48px; height: 48px; font-size: 1.75rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
 .g-lb button.g-x:hover, .g-lb button.g-nav:hover { border-color: var(--fg); }
 .g-lb button.g-nav { position: absolute; top: 50%; transform: translateY(-50%); }
 .g-lb .g-prev { left: 12px; } .g-lb .g-next { right: 12px; }
