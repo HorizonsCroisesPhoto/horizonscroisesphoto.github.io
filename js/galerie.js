@@ -131,7 +131,15 @@
       }
       sec.appendChild(grid); out.insertBefore(sec, $("#tirage") || $("#g-note"));
     });
-    if (named) { bar.appendChild(el("span", "g-count", photos.length + " photos")); $("#g-bar").hidden = false; }
+    if (named) {
+      $("#g-bar").hidden = false;
+      // onglet actif = partie la plus visible à l'écran
+      const links = [...bar.querySelectorAll("a")];
+      const spy = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.setAttribute("aria-current", a.hash === "#" + e.target.id ? "true" : "false")); });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      out.querySelectorAll(".g-section").forEach((sec) => spy.observe(sec));
+    }
   }
 
   // ----- visionneuse + téléchargement

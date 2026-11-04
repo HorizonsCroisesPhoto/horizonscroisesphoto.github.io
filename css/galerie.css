@@ -53,12 +53,16 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 
 /* Galerie */
 .g-bar { position: sticky; top: 0; z-index: 3; background: rgb(var(--scrim, 11 11 12) / 0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
-.g-bar .wrap { display: flex; gap: 6px 22px; flex-wrap: wrap; align-items: center; min-height: 52px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
-.g-bar a { text-decoration: none; color: var(--muted); padding: 6px 0; border-bottom: 1px solid transparent; }
-.g-bar a:hover { color: var(--fg); border-bottom-color: var(--blue); }
-.g-bar .g-count { margin-left: auto; color: var(--muted); }
-.g-section { padding: clamp(28px, 4vw, 48px) 0 0; scroll-margin-top: 60px; }
-.g-section h2 { text-align: center; margin: 0 0 clamp(18px, 2.4vw, 28px); }
+.g-bar .wrap { display: flex; gap: 6px clamp(14px, 3vw, 36px); flex-wrap: wrap; justify-content: center; align-items: center; min-height: 54px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
+/* onglets des parties : la partie affichée à l'écran est soulignée */
+.g-bar a { text-decoration: none; color: var(--muted); padding: 8px 2px; border-bottom: 2px solid transparent; transition: color .2s ease, border-color .2s ease; }
+.g-bar a:hover { color: var(--fg); }
+.g-bar a[aria-current="true"] { color: var(--fg); border-bottom-color: var(--blue); }
+.g-bar .g-count { display: none; }
+.g-section { padding: clamp(36px, 5vw, 64px) 0 0; scroll-margin-top: 64px; }
+/* titre de partie entre deux traits, comme les rubriques de l'Art équestre */
+.g-section h2 { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); text-align: center; margin: 0 0 clamp(20px, 2.8vw, 36px); }
+.g-section h2::before, .g-section h2::after { content: ""; flex: 1 1 24px; min-width: 24px; height: 1px; background: var(--fg); opacity: 0.35; }
 .g-grid { columns: 3 300px; column-gap: clamp(10px, 1.4vw, 18px); }
 .g-grid button { display: block; width: 100%; margin: 0 0 clamp(10px, 1.4vw, 18px); padding: 0; border: 0; background: var(--panel); cursor: zoom-in; break-inside: avoid; }
 .g-grid img { display: block; width: 100%; height: auto; opacity: 0; transition: opacity .4s ease; }
@@ -117,3 +121,9 @@ html.eq-light .g-pop { box-shadow: 0 24px 60px rgb(29 42 51 / 0.18); }
 .ev-lock { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .ev-lock svg { width: 14px; height: 14px; }
 .ev-hd { margin: 0; }
+@media (max-width: 640px) {
+  /* onglets sur une seule ligne, qu'on fait défiler du doigt */
+  .g-bar .wrap { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; gap: 18px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .g-bar .wrap::-webkit-scrollbar { display: none; }
+  .g-bar a { white-space: nowrap; flex: none; }
+}
