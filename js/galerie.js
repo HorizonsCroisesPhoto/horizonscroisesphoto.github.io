@@ -68,8 +68,20 @@
         out.appendChild(sec);
         continue;
       }
+      // la galerie la plus récente est mise en avant, en grand ; les précédentes en cartes en dessous
+      const [first, ...rest] = r.g;
+      const fa = el("a", "eq-feature" + (first.co === "paysage" ? " is-wide" : "")); fa.href = first.slug + "/";
+      const fcov = el("span", "eq-feature-cover"), fimg = el("img");
+      fimg.alt = "Couverture de la galerie " + first.title;
+      if (first.co === "paysage") { fimg.width = 1500; fimg.height = 1000; } else { fimg.width = 720; fimg.height = 900; }
+      fimg.dataset.file = first.slug + "/" + (first.co ? "cw.bin" : "c.bin"); fcov.appendChild(fimg); io.observe(fimg);
+      const fbody = el("span", "eq-feature-body");
+      fbody.append(el("span", "label", "Dernière galerie"), el("h3", "eq-feature-title", first.title));
+      const fmeta = el("span", "dep-meta"); fmeta.append(el("span", null, first.date), el("span", null, first.n + " photos"));
+      fbody.append(fmeta, el("span", "btn", "Voir la galerie →"));
+      fa.append(fcov, fbody); sec.appendChild(fa);
       const ul = el("ul", "departures eq-cards");
-      for (const g of r.g) {
+      for (const g of rest) {
         const li = el("li"), a = el("a", "dep eq-card"); a.href = g.slug + "/";
         const cov = el("span", "dep-cover"), img = el("img");
         img.alt = "Couverture de la galerie " + g.title; img.width = 720; img.height = 900;
@@ -81,7 +93,8 @@
         body.appendChild(meta);
         a.append(cov, body); li.appendChild(a); ul.appendChild(li);
       }
-      sec.appendChild(ul); out.appendChild(sec);
+      if (rest.length) sec.appendChild(ul);
+      out.appendChild(sec);
     }
     out.hidden = false;
   }
