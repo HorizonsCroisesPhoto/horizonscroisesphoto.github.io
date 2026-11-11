@@ -123,3 +123,61 @@ legend { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.16em; t
 .opt.is-off { opacity: .4; cursor: not-allowed; }
 .opt.is-off:hover { border-color: var(--line); }
 .atelier-head p b { font-weight: 500; color: var(--fg); }
+
+
+/* ---------- Avis ---------- */
+.avis { border-top: 1px solid var(--line); margin-top: clamp(40px, 6vw, 80px); padding-top: clamp(32px, 4vw, 56px); display: grid; gap: clamp(20px, 2.4vw, 32px); }
+.avis-head h2 { margin: 0; }
+.avis-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+@media (max-width: 900px) { .avis-grid { grid-template-columns: minmax(0, 1fr); } }
+.avis-col { display: grid; gap: 22px; min-width: 0; align-content: start; }
+
+.stars { display: inline-flex; gap: 2px; vertical-align: middle; }
+.stars svg, .rate svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-linejoin: round; }
+.stars svg.on, .rate svg.on { fill: var(--copper); stroke: var(--copper); }
+.stars svg.half path { stroke: var(--copper); }
+.stars svg.half path.fill { fill: var(--copper); stroke: none; }
+
+.avis-score { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin: 0; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.avis-score .stars svg { width: 20px; height: 20px; }
+.avis-score b { font-weight: 500; font-size: 1rem; color: var(--fg); letter-spacing: 0.04em; }
+.avis-score--vide { font-family: var(--display); font-size: 1rem; letter-spacing: 0; text-transform: none; line-height: 1.55; max-width: 52ch; }
+
+.avis-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.avis-item { display: grid; gap: 10px; padding: 20px 0; border-top: 1px solid var(--line); }
+.avis-item:first-child { border-top: 0; padding-top: 0; }
+.avis-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; }
+.avis-meta b { font-weight: 500; }
+.avis-meta time { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.avis-texte { margin: 0; white-space: pre-line; max-width: 62ch; color: color-mix(in srgb, var(--fg) 88%, var(--bg)); }
+.avis-rep { margin-left: 18px; padding-left: 16px; border-left: 2px solid var(--copper); display: grid; gap: 4px; }
+.avis-rep b { font-family: var(--mono); font-weight: 500; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--copper); }
+.avis-rep p { margin: 0; white-space: pre-line; font-size: 0.9375rem; color: var(--muted); max-width: 60ch; }
+.avis-plus { justify-self: start; cursor: pointer; }
+
+.avis-form { border: 1px solid var(--line); background: var(--panel); padding: clamp(18px, 2.2vw, 28px); display: grid; gap: 18px; min-width: 0; }
+.avis-form h3 { font-size: 1.15rem; font-weight: 400; letter-spacing: 0.12em; }
+.avis-intro { margin: 0; font-size: 0.9375rem; color: var(--muted); line-height: 1.55; }
+.avis-form legend { margin-bottom: 6px; }
+.rate { display: flex; gap: 4px; }
+.rate input { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+.rate label { cursor: pointer; padding: 4px; line-height: 0; }
+.rate svg { width: 28px; height: 28px; transition: fill .15s ease, stroke .15s ease; }
+.rate input:focus-visible + label { outline: 2px solid var(--blue); outline-offset: 1px; }
+.champ { display: grid; gap: 8px; }
+.champ label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.champ input, .champ textarea { width: 100%; font: inherit; font-size: 1rem; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 0; padding: 11px 12px; }
+.champ textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+.champ input:focus, .champ textarea:focus { outline: none; border-color: var(--fg); }
+.piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.avis-form .btn { width: 100%; cursor: pointer; }
+.avis-form .btn:disabled { opacity: .6; cursor: wait; }
+.avis-msg { margin: 0; font-size: 0.875rem; color: var(--copper); line-height: 1.5; }
+.avis-prive { margin: 0; font-size: 0.8125rem; color: var(--muted); line-height: 1.5; }
+.avis-form.is-sent h3 { color: var(--copper); }
+.avis-legal { margin: 0; font-size: 0.8125rem; color: var(--muted); line-height: 1.55; max-width: 92ch; }
+.avis-legal a { color: inherit; }
+
+/* Rappel de la note dans l'encadré « Commander un tirage » */
+.order-avis { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.06em; color: var(--muted); }
+.order-avis:hover { color: var(--fg); }
