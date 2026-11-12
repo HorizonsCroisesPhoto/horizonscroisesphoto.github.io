@@ -257,7 +257,19 @@
     form.querySelector(".btn").setAttribute("aria-busy", "true");
     // Stripe n'accepte que lettres, chiffres, - et _ : « Painted Souls-5 » devient « Painted_Souls-5 »
     const cref = REF.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9_-]+/g, "_");
-    window.location.href = url + (cref ? "?client_reference_id=" + cref : "");
+    const go = () => { window.location.href = url + (cref ? "?client_reference_id=" + cref : ""); };
+    // Mesure d'audience (Umami, sans cookie) : d\u00e9part vers le paiement Stripe ; on attend l'envoi 400 ms au plus
+    let sent = null;
+    try {
+      if (window.umami) sent = window.umami.track("Commande Stripe", {
+        oeuvre: REF || "(sans r\u00e9f\u00e9rence)",
+        support: { tirage: "Tirage photo", toile: "Toile", cadre: "Cadre noir", caisse: "Caisse américaine", fichier: "Fichier HD" }[st.support],
+        format: st.s.digital ? "fichier HD" : st.z.label + (st.b ? " + bord blanc" : ""),
+        prix: st.b ? st.s.pricesBorder[st.size] : st.s.prices[st.size],
+        langue: EN ? "EN" : "FR",
+      });
+    } catch (err) {}
+    Promise.race([Promise.resolve(sent).catch(() => {}), new Promise((r) => setTimeout(r, 400))]).then(go);
   });
   // retour arrière depuis Stripe : réactiver le bouton
   window.addEventListener("pageshow", () => form.querySelector(".btn").removeAttribute("aria-busy"));

@@ -21,7 +21,8 @@
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preload" href="../fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=lang6"></head>
+<link rel="stylesheet" href="../css/site.css?v=lang6"><script defer src="https://cloud.umami.is/script.js" data-website-id="667f5cae-4ee1-4fc1-8b9c-b5dd78daa15b" data-domains="horizonscroisesphoto.com"></script>
+</head>
 <body>
 <header class="site-header">
   <div class="wrap">
@@ -49,7 +50,8 @@
     <h2>Copyright</h2>
     <p>All photographs on this site are the property of Philippe Sesti Soulier. Any reproduction, in whole or in part, is prohibited without written permission.</p>
     <h2>Personal data</h2>
-    <p>This site does not set any analytics cookies. Data entered when placing an order is processed by Stripe for payment and used solely for delivery, as set out in the <a href="terms-of-sale.html">terms of sale</a>.</p>
+    <p>This site does not set any analytics cookies. Visits are measured anonymously with Umami, without cookies or personal data, solely for the publisher: number of visits, pages and photos viewed, downloads. <a href="#" id="hc-optout" data-on="Stop counting my visits on this device" data-off="Your visits are no longer counted on this device (undo)">Stop counting my visits on this device</a>.</p>
+    <p>Data entered when placing an order is processed by Stripe for payment and used solely for delivery, as set out in the <a href="terms-of-sale.html">terms of sale</a>.</p>
   </div>
 </div>
 </main>
@@ -63,5 +65,20 @@
     </nav>
   </div>
 </footer>
+<script>
+(() => {
+  // Opposition à la mesure d'audience : Umami ignore les visites si localStorage « umami.disabled » est présent
+  const a = document.getElementById("hc-optout");
+  if (!a) return;
+  const get = () => { try { return !!localStorage.getItem("umami.disabled"); } catch (e) { return false; } };
+  const paint = () => { a.textContent = get() ? a.dataset.off : a.dataset.on; };
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    try { get() ? localStorage.removeItem("umami.disabled") : localStorage.setItem("umami.disabled", "1"); } catch (err) {}
+    paint();
+  });
+  paint();
+})();
+</script>
 </body>
 </html>

@@ -21,7 +21,8 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=lang6"></head>
+<link rel="stylesheet" href="css/site.css?v=lang6"><script defer src="https://cloud.umami.is/script.js" data-website-id="667f5cae-4ee1-4fc1-8b9c-b5dd78daa15b" data-domains="horizonscroisesphoto.com"></script>
+</head>
 <body>
 <header class="site-header">
   <div class="wrap">
@@ -49,7 +50,8 @@
     <h2>Droits d'auteur</h2>
     <p>Toutes les photographies de ce site sont la propriété de Philippe Sesti Soulier. Toute reproduction, même partielle, est interdite sans autorisation écrite.</p>
     <h2>Données personnelles</h2>
-    <p>Ce site ne dépose aucun cookie de mesure d'audience. Les données saisies lors d'une commande sont traitées par Stripe pour le paiement et utilisées uniquement pour la livraison, comme indiqué dans les <a href="conditions-de-vente.html">conditions de vente</a>.</p>
+    <p>Ce site ne dépose aucun cookie de mesure d'audience. La fréquentation est mesurée de façon anonyme avec l'outil Umami, sans cookie ni donnée personnelle, pour le seul compte de l'éditeur : nombre de visites, pages et photos consultées, téléchargements. <a href="#" id="hc-optout" data-on="Ne plus être compté sur cet appareil" data-off="Vos visites ne sont plus comptées sur cet appareil (annuler)">Ne plus être compté sur cet appareil</a>.</p>
+    <p>Les données saisies lors d'une commande sont traitées par Stripe pour le paiement et utilisées uniquement pour la livraison, comme indiqué dans les <a href="conditions-de-vente.html">conditions de vente</a>.</p>
   </div>
 </div>
 </main>
@@ -63,5 +65,20 @@
     </nav>
   </div>
 </footer>
+<script>
+(() => {
+  // Opposition à la mesure d'audience : Umami ignore les visites si localStorage « umami.disabled » est présent
+  const a = document.getElementById("hc-optout");
+  if (!a) return;
+  const get = () => { try { return !!localStorage.getItem("umami.disabled"); } catch (e) { return false; } };
+  const paint = () => { a.textContent = get() ? a.dataset.off : a.dataset.on; };
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    try { get() ? localStorage.removeItem("umami.disabled") : localStorage.setItem("umami.disabled", "1"); } catch (err) {}
+    paint();
+  });
+  paint();
+})();
+</script>
 </body>
 </html>

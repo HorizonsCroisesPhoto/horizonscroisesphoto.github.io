@@ -14,6 +14,14 @@
   const KEYNAME = root.dataset.store || "hc-galeries-mdp"; // un mot de passe par rubrique ou par événement
   let key = null, photos = [], cur = 0, show = () => {};
 
+  // Mesure d'audience (Umami, sans cookie) : compteurs anonymes ; sans effet si le script est absent ou bloqué
+  const RUBRIQUE = root.dataset.rubrique || "Art équestre";
+  let galTitle = IS_INDEX ? "Accueil " + RUBRIQUE : "";
+  const track = (name, data) => {
+    try { if (window.umami) window.umami.track(name, Object.assign({ rubrique: RUBRIQUE, galerie: galTitle }, data)); } catch (e) {}
+  };
+  const photoLabel = (ph) => (ph.sec ? ph.sec + " · " : "") + "n° " + ph.no;
+
   async function derive(pw) {
     const raw = await crypto.subtle.importKey("raw", new TextEncoder().encode(norm(pw)), "PBKDF2", false, ["deriveKey"]);
     return crypto.subtle.deriveKey({ name: "PBKDF2", salt: SALT, iterations: ITER, hash: "SHA-256" }, raw, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
@@ -29,6 +37,7 @@
       document.querySelectorAll("[data-locked]").forEach((el) => { el.hidden = true; });
       IS_INDEX ? buildIndex(data) : buildGallery(data);
       html.classList.remove("eq-auto");
+      if (!silent) track("Mot de passe validé");
       return true;
     } catch (e) {
       html.classList.remove("eq-auto");
@@ -102,6 +111,7 @@
   // ----- galerie
   function buildGallery(m) {
     document.title = m.title + " · " + m.date + " · " + (root.dataset.rubrique || "Art équestre") + " · Horizons Croisés";
+    galTitle = m.title + " · " + m.date;
     const h1 = $("#g-title"); h1.textContent = m.title; h1.hidden = false;
     $("#g-crumb").textContent = " / " + m.title;
     const strip = $("#g-strip");
@@ -117,7 +127,10 @@
       hero.hidden = false;
     }
     const hd = $("#g-hd");
-    if (hd && m.hd) { $("a", hd).href = m.hd; hd.hidden = false; }
+    if (hd && m.hd) {
+      $("a", hd).href = m.hd; hd.hidden = false;
+      $("a", hd).addEventListener("click", () => track("Fichiers HD (kDrive)"));
+    }
     const out = $("#g-content");
     out.hidden = false;
     photos = [];
@@ -163,13 +176,21 @@
     $("#g-free").addEventListener("click", () => pop.showModal());
     $(".g-x", pop).addEventListener("click", () => pop.close());
     pop.addEventListener("click", (e) => { if (e.target === pop) pop.close(); });
-    dl.addEventListener("click", () => { if (dl.href) setTimeout(() => pop.close(), 300); });
-    buy.addEventListener("click", () => { lb.close(); order(photos[cur]); });
+    dl.addEventListener("click", () => {
+      if (!dl.href) return;
+      track("Téléchargement offert", { photo: photoLabel(photos[cur]) });
+      setTimeout(() => pop.close(), 300);
+    });
+    buy.addEventListener("click", () => {
+      track("Commander depuis une galerie", { photo: photoLabel(photos[cur]) });
+      lb.close(); order(photos[cur]);
+    });
     show = async (i) => {
       cur = (i + photos.length) % photos.length;
       const ph = photos[cur];
       $(".g-lb-count", lb).textContent = (ph.sec ? ph.sec + " · photo n° " : "Photo n° ") + ph.no + " · " + (cur + 1) + " / " + photos.length;
       if (!lb.open) lb.showModal();
+      track("Vue photo", { photo: photoLabel(ph) });
       lbImg.removeAttribute("src"); wait.hidden = false; dl.removeAttribute("href");
       buy.hidden = ph.s === "-"; // définition trop faible pour un tirage : téléchargement seul
       try {
